@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./home.css";
+import "./Home.css";
 import profileImage from "../../images/profile.jpg";
 import project_1 from "./images/project-1.png";
 import project_2 from "./images/project-2.png";
