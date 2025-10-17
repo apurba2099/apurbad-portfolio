@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./home.css";
 import profileImage from "../../images/profile.jpg";
+import project_1 from "./images/project-1.png";
+import project_2 from "./images/project-2.png";
+import project_3 from "./images/project-3.png";
 import {
   FaHtml5,
   FaCss3Alt,
@@ -47,21 +50,27 @@ function Portfolio() {
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
+      title: "Pizzape",
       description: "Full-stack e-commerce application with payment integration",
-      gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      backgroundImage: project_1,
+      type: "Food Website",
+      color: "#ffe100ff",
     },
     {
       id: 2,
-      title: "Task Manager Pro",
+      title: "AdminLTE",
       description: "Productivity app with real-time collaboration features",
-      gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+      backgroundImage: project_2,
+      type: "CRUD APP",
+      color: "#7c56fe",
     },
     {
       id: 3,
-      title: "Weather Dashboard",
+      title: "MUTE MARKETING",
       description: "Interactive weather app with beautiful data visualization",
-      gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+      backgroundImage: project_3,
+      type: "Client-Project",
+      color: "#d0ff00ff",
     },
   ];
 
@@ -122,7 +131,7 @@ function Portfolio() {
 
       {/* Who am I Section */}
       <section className="about-section">
-        <h2>Who am I</h2>
+        <h2>Who am I ?</h2>
         <p className="about-text">
           Web developer passionate about building beautiful and functional web
           applications. Full-stack developer with experience in modern
@@ -134,7 +143,7 @@ function Portfolio() {
 
       {/* Tech Stack Section */}
       <section className="tech-section">
-        <h2>Tech Stack</h2>
+        <h2>Tech Stack &lt;/&gt;</h2>
         <div className="tech-grid">
           {techStack.map((tech, index) => (
             <div key={index} className="tech-item">
@@ -147,20 +156,42 @@ function Portfolio() {
 
       {/* Projects Section */}
       <section id="projects" className="projects-section">
-        <h2>Projects</h2>
+        <h2>Projects &#9881;</h2>
         <div className="projects-grid">
           {projects.map((project) => (
             <div key={project.id} className="project-card">
-              <div
-                className="project-preview"
-                style={{ background: project.gradient }}
-              >
+              <div className="project-preview">
                 <div className="project-overlay">
-                  <h3>{project.title}</h3>
+                  <img src={project.backgroundImage} alt={project.title} />
                 </div>
               </div>
               <div className="project-info">
-                <p>{project.description}</p>
+                <div className="project-links">
+                  <p
+                    style={{ padding: "2px 6px", color: "#fff", margin: "4px" }}
+                    className="project-name"
+                  >
+                    <strong>{project.title}</strong>
+                  </p>
+                  <span>
+                    <i class="fa fa-external-link" aria-hidden="true"></i>
+                  </span>
+                </div>
+                <span
+                  style={{
+                    color: project.color,
+                    border: `2px solid ${project.color}`,
+                    borderRadius: "12px",
+                    padding: "2px 6px",
+                    margin: "4px",
+                  }}
+                  className="project-type"
+                >
+                  <strong> {project.type}</strong>
+                </span>
+                <p style={{ padding: "2px 6px", margin: "4px" }}>
+                  {project.description}
+                </p>
               </div>
             </div>
           ))}
@@ -169,7 +200,7 @@ function Portfolio() {
 
       {/* Find Me Here Section */}
       <section className="social-section">
-        <h2>Find Me Here</h2>
+        <h2>Find Me Here &#x1F50D;</h2>
         <div className="social-grid">
           {socialLinks.map((social, index) => (
             <a key={index} href={social.url} className="social-card">
