@@ -16,6 +16,7 @@ import {
   FaTwitter,
   FaInstagram,
   FaFacebook,
+  FaDiscord,
 } from "react-icons/fa";
 import {
   SiTailwindcss,
@@ -103,6 +104,12 @@ export default function Portfolio() {
       username: "apurba2099",
       url: "https://www.facebook.com/apurba2099",
     },
+    {
+      name: "Discord",
+      icon: <FaDiscord color="#5132edff" />,
+      username: "apurba_2003",
+      url: "https://discordapp.com/users/1144705121385713816",
+    },
   ];
 
   return (
@@ -113,7 +120,7 @@ export default function Portfolio() {
           <div className="hero-text">
             <p className="greeting">Hey 👋 I am</p>
             <h1 className="name">Apurba Dutta</h1>
-            <p className="title">Web Developer</p>
+            <p className="title">&lt;Web Developer/&gt;</p>
           </div>
           <div className="profile-image">
             <img src={profileImage} alt="Profile" />
@@ -193,7 +200,9 @@ export default function Portfolio() {
 
       {/* Find Me Here Section */}
       <section className="social-section">
-        <h2>Find Me Here &#x1F50D;</h2>
+        <h2>
+          Find Me Here <i class="fa-solid fa-magnifying-glass"></i>
+        </h2>
         <div className="social-grid">
           {socialLinks.map((social, index) => (
             <a key={index} href={social.url} className="social-card">

@@ -5,9 +5,14 @@ import {
   FaInstagram,
   FaFacebook,
   FaGithub,
+  FaDiscord,
 } from "react-icons/fa";
 import "./Contact.css";
-import Navigation from ".//..//../components/Navigation/Navigation";
+import Navigation from "../../components/Navigation/Navigation";
+
+// ✅ Toastify import
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Contact() {
   const [showSuccess, setShowSuccess] = useState(false);
@@ -16,27 +21,9 @@ export default function Contact() {
     email: "",
     message: "",
   });
+  const [_, setIsSubmitting] = useState(false); //isSubmitting
 
-  //Handler Functions
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Show success message
-    setShowSuccess(true);
-    // Reset form
-    setFormData({ name: "", email: "", message: "" });
-    // Hide success message after 5 seconds
-    setTimeout(() => {
-      setShowSuccess(false);
-    }, 5000);
-  };
+  const Access_KEY = "d16f0bec-44b1-4c37-8c33-4d264b2b50a2";
 
   const socialLinks = [
     {
@@ -47,7 +34,7 @@ export default function Contact() {
     },
     {
       name: "GitHub",
-      icon: <FaGithub color="#ffffffff" />,
+      icon: <FaGithub color="#ffffff" />,
       username: "apurba2099",
       url: "https://github.com/apurba2099",
     },
@@ -69,7 +56,57 @@ export default function Contact() {
       username: "apurba2099",
       url: "https://www.facebook.com/apurba2099",
     },
+    {
+      name: "Discord",
+      icon: <FaDiscord color="#5865F2" />,
+      username: "apurba_2003",
+      url: "https://discordapp.com/users/1144705121385713816",
+    },
   ];
+
+  // ✅ Handle Input Change
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // ✅ Submit form to Web3Forms
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: Access_KEY,
+          ...formData,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // ✅ Show your custom success box
+        setShowSuccess(true);
+        setFormData({ name: "", email: "", message: "" });
+
+        // Hide it after 5s
+        setTimeout(() => setShowSuccess(false), 5000);
+      } else {
+        toast.error("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      toast.error(`An error occurred. Please try again. ${error.message}`);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="contact">
       {/* Contact Section */}
@@ -138,7 +175,9 @@ export default function Contact() {
 
       {/* Find Me Here Section */}
       <section className="social-section">
-        <h2>Connect With Me Also Here &#x1F50D;</h2>
+        <h2>
+          Touch with me on social media <i class="fa-solid fa-message"></i>
+        </h2>
         <div className="social-grid">
           {socialLinks.map((social, index) => (
             <a key={index} href={social.url} className="social-card">
@@ -164,6 +203,17 @@ export default function Contact() {
 
       {/* Bottom Navigation */}
       <Navigation />
+
+      {/* Toaster Section  */}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 }

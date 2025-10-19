@@ -243,6 +243,7 @@ body {
 }
 
 .social-grid {
+  width: 60%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
@@ -301,6 +302,7 @@ body {
   }
 
   .social-grid {
+    width: 100%;
     grid-template-columns: repeat(2, 1fr);
   }
 }
