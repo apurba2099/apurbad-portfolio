@@ -7,8 +7,9 @@ import {
   FaGithub,
   FaDiscord,
 } from "react-icons/fa";
+
+import { SiX } from "react-icons/si";
 import "./Contact.css";
-import Navigation from "../../components/Navigation/Navigation";
 
 // ✅ Toastify import
 import { toast, ToastContainer } from "react-toastify";
@@ -50,7 +51,7 @@ export default function Contact() {
     },
     {
       name: "Twitter",
-      icon: <FaTwitter color="#1DA1F2" />,
+      icon: <SiX color="#ffffffff" />,
       username: "apurbadutta2003",
       url: "https://x.com/apurbadutta2003",
     },

@@ -13,7 +13,6 @@ import {
   FaPython,
   FaDatabase,
   FaLinkedin,
-  FaTwitter,
   FaInstagram,
   FaFacebook,
   FaDiscord,
@@ -24,9 +23,9 @@ import {
   SiMongodb,
   SiPostman,
   SiC,
+  SiX,
 } from "react-icons/si";
 import "./Home.css";
-import Navigation from ".//..//../components/Navigation/Navigation";
 
 export default function Portfolio() {
   const techStack = [
@@ -97,7 +96,7 @@ export default function Portfolio() {
     },
     {
       name: "Twitter",
-      icon: <FaTwitter color="#1DA1F2" />,
+      icon: <SiX color="#ffffffff" />,
       username: "apurbadutta2003",
       url: "https://x.com/apurbadutta2003",
     },
