@@ -207,7 +207,7 @@ export default function Project() {
         <div className="tech-stack">
           <p className="tech-stack-name">
             <strong>
-              <i class="fa-solid fa-code"></i> Tech Stack Use &bull;
+              <i className="fa-solid fa-code"></i> Tech Stack Use &bull;
             </strong>
           </p>
           {project.techStack &&
@@ -237,7 +237,7 @@ export default function Project() {
             <i className="fa-solid fa-arrow-left"></i>
           </a>
           <h2>
-            Projects <i class="fa-solid fa-gears"></i>
+            Projects <i className="fa-solid fa-gears"></i>
           </h2>
         </div>
 
@@ -245,8 +245,8 @@ export default function Project() {
         {personalProjects.length > 0 && (
           <div className="project-category">
             <h3 className="category-title">
-              Personal Projects<i class="fa-solid fa-gear-complex-code"></i>
-              <i class="fa-solid fa-person-walking-arrow-right"></i>
+              Personal Projects<i className="fa-solid fa-gear-complex-code"></i>
+              <i className="fa-solid fa-person-walking-arrow-right"></i>
             </h3>
             <div className="projects-grid">
               {personalProjects.map(renderProjectCard)}
@@ -258,7 +258,7 @@ export default function Project() {
         {clientProjects.length > 0 && (
           <div className="project-category">
             <h3 className="category-title">
-              Client Projects <i class="fa-solid fa-briefcase"></i>
+              Client Projects <i className="fa-solid fa-briefcase"></i>
             </h3>
             <div className="projects-grid">
               {clientProjects.map(renderProjectCard)}
@@ -266,9 +266,6 @@ export default function Project() {
           </div>
         )}
       </section>
-
-      {/* Bottom Navigation */}
-      <Navigation />
     </div>
   );
 }

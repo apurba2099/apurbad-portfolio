@@ -123,10 +123,10 @@ export default function Contact() {
       <section id="contact" className="contact-section">
         <div className="contact-header">
           <a className="back-btn" onClick={() => handleNavClick("/")}>
-            <i class="fa-solid fa-arrow-left"></i>
+            <i className="fa-solid fa-arrow-left"></i>
           </a>
           <h2>
-            Contact Me <i class="fa-regular fa-message"></i>
+            Contact Me <i className="fa-regular fa-message"></i>
           </h2>
         </div>
 
@@ -188,7 +188,7 @@ export default function Contact() {
       {/* Find Me Here Section */}
       <section className="social-section">
         <h2>
-          Touch with me on social media <i class="fa-solid fa-message"></i>
+          Touch with me on social media <i className="fa-solid fa-message"></i>
         </h2>
         <div className="social-grid">
           {socialLinks.map((social, index) => (
@@ -204,7 +204,7 @@ export default function Contact() {
       <section className="envelop">
         <div className="mail-box">
           <a href="mailto:apurbadutta2099@gmail.com">
-            <i class="fa fa-envelope"></i> APURBADUTTA2099@GMAIL.COM
+            <i className="fa fa-envelope"></i> APURBADUTTA2099@GMAIL.COM
           </a>
           <h2>&lt;Apurba Dutta /&gt;</h2>
           <a href="https://apurbad-portfolio.vercel.app" target="_blank">
@@ -212,9 +212,6 @@ export default function Contact() {
           </a>
         </div>
       </section>
-
-      {/* Bottom Navigation */}
-      <Navigation />
 
       {/* Toaster Section  */}
       <ToastContainer

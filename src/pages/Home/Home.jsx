@@ -184,7 +184,7 @@ export default function Portfolio() {
                   </p>
                   <span>
                     <a href={project.liveLink}>
-                      <i class="fa fa-external-link" aria-hidden="true"></i>
+                      <i className="fa fa-external-link" aria-hidden="true"></i>
                     </a>
                   </span>
                 </div>
@@ -212,7 +212,7 @@ export default function Portfolio() {
       {/* Find Me Here Section */}
       <section className="social-section">
         <h2>
-          Find Me Here <i class="fa-solid fa-magnifying-glass"></i>
+          Find Me Here <i className="fa-solid fa-magnifying-glass"></i>
         </h2>
         <div className="social-grid">
           {socialLinks.map((social, index) => (
@@ -223,9 +223,6 @@ export default function Portfolio() {
           ))}
         </div>
       </section>
-
-      {/* Bottom Navigation */}
-      <Navigation />
     </div>
   );
 }
