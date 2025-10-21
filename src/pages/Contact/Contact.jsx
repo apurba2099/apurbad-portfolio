@@ -14,7 +14,17 @@ import Navigation from "../../components/Navigation/Navigation";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+//Routes
+import { useNavigate } from "react-router-dom";
+
 export default function Contact() {
+  //Routes
+  const navigate = useNavigate();
+
+  // Navigate handler function
+  const handleNavClick = (path) => {
+    navigate(path);
+  };
   const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -112,7 +122,7 @@ export default function Contact() {
       {/* Contact Section */}
       <section id="contact" className="contact-section">
         <div className="contact-header">
-          <a className="back-btn">
+          <a className="back-btn" onClick={() => handleNavClick("/")}>
             <i class="fa-solid fa-arrow-left"></i>
           </a>
           <h2>

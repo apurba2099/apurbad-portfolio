@@ -4,7 +4,19 @@ import Navigation from "../../components/Navigation/Navigation";
 import project_1 from "..//../assets/images/project-1.png";
 import project_2 from "..//../assets/images/project-2.png";
 import project_3 from "..//../assets/images/project-3.png";
+
+//Routes Import
+import { useNavigate } from "react-router-dom";
+
 export default function Project() {
+  // Routes
+  const navigate = useNavigate();
+
+  //Route Handler Function
+  function handleNavClick(path) {
+    navigate(path);
+  }
+
   const projects = [
     {
       id: 1,
@@ -153,7 +165,7 @@ export default function Project() {
       {/* Project Section */}
       <section id="project" className="project-section">
         <div className="project-header">
-          <a className="back-btn">
+          <a className="back-btn" onClick={() => handleNavClick("/")}>
             <i className="fa-solid fa-arrow-left"></i>
           </a>
           <h2>
