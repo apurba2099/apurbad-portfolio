@@ -53,7 +53,7 @@ export default function Portfolio() {
       description: "Full-stack e-commerce application with payment integration",
       backgroundImage: project_1,
       type: "Food Website",
-      color: "#ffe100ff",
+      color: "#facc15",
     },
     {
       id: 2,
@@ -61,7 +61,7 @@ export default function Portfolio() {
       description: "Productivity app with real-time collaboration features",
       backgroundImage: project_2,
       type: "CRUD APP",
-      color: "#7c56fe",
+      color: "#4f46e5",
     },
     {
       id: 3,
@@ -69,7 +69,7 @@ export default function Portfolio() {
       description: "Interactive weather app with beautiful data visualization",
       backgroundImage: project_3,
       type: "Client-Project",
-      color: "#d0ff00ff",
+      color: "#f1e504",
     },
   ];
 

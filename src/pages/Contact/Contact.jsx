@@ -115,7 +115,9 @@ export default function Contact() {
           <a className="back-btn">
             <i class="fa-solid fa-arrow-left"></i>
           </a>
-          <h2>Contact Me</h2>
+          <h2>
+            Contact Me <i class="fa-regular fa-message"></i>
+          </h2>
         </div>
 
         {showSuccess && (
