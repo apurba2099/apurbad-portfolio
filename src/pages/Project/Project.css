@@ -127,7 +127,8 @@
   margin-bottom: 12px;
 }
 
-.project-name {
+.project-name,
+.tech-stack-name {
   padding: 2px 6px;
   color: #fff;
   margin: 4px;
@@ -160,7 +161,8 @@
   transform: scale(1.05);
 }
 
-.project-type {
+.project-type,
+.tech-stack-type {
   display: inline-block;
   border-radius: 12px;
   padding: 4px 12px;

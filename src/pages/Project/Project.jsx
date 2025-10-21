@@ -4,6 +4,12 @@ import Navigation from "../../components/Navigation/Navigation";
 import project_1 from "..//../assets/images/project-1.png";
 import project_2 from "..//../assets/images/project-2.png";
 import project_3 from "..//../assets/images/project-3.png";
+import project_4 from "..//../assets/images/project-4.png";
+import project_5 from "..//../assets/images/project-5.png";
+import project_6 from "..//../assets/images/project-6.png";
+import project_7 from "..//../assets/images/project-7.png";
+import project_8 from "..//../assets/images/project-8.png";
+import project_9 from "..//../assets/images/project-9.png";
 
 //Routes Import
 import { useNavigate } from "react-router-dom";
@@ -21,95 +27,135 @@ export default function Project() {
     {
       id: 1,
       title: "Pizzape",
-      description: "Full-stack e-commerce application with payment integration",
+      description:
+        "An online Pizza ordering website where users can browse menus and place pizza orders easily.",
       backgroundImage: project_1,
-      type: "Food Website",
+      type: "Piiza Ordering Website",
+      class: "Pizza Ordering Website",
       color: "#facc15",
+      techStack: ["React Js", "Tailwind Css", "API"],
+      liveLink: "https://pizzape.vercel.app/",
+      githubLink: "https://github.com/apurba2099/Pizzape",
     },
     {
       id: 2,
       title: "AdminLTE",
-      description: "Productivity app with real-time collaboration features",
+      description:
+        "A CRUD-based admin dashboard for managing users login, add data, update data, delete data.",
       backgroundImage: project_2,
-      type: "CRUD APP",
+      type: "CRUD App",
+      class: "CRUD App",
       color: "#4f46e5",
+      techStack: [
+        "React Js",
+        "Css",
+        "Node Js",
+        "Express Js",
+        "Mongo DB",
+        "Postman",
+      ],
+      liveLink: "https://admin-lte-app.vercel.app/",
+      githubLink: "https://github.com/apurba2099/AdminLTE_application",
     },
     {
       id: 3,
       title: "MUTE MARKETING",
-      description: "Interactive weather app with beautiful data visualization",
+      description:
+        "A digital marketing agency website designed to showcase services and client success stories and portfolio.",
       backgroundImage: project_3,
-      type: "Client-Project",
+      type: "client-project",
+      class: "Digital Marketing Agency",
       color: "#f1e504",
+      techStack: ["React Js", "Css", "WEB3 Form API"],
+      liveLink: "https://mute-market-v2.vercel.app/",
+      githubLink: "https://github.com/apurba2099/mute-market-v2",
     },
     {
       id: 4,
-      title: "Karm Bhumi",
-      description: "Interactive weather app with beautiful data visualization",
-      backgroundImage: project_3,
-      type: "Client-Project",
-      color: "#51b563",
-      liveLink: "https://karmbhumi.fun/",
-      githubLink: "https://github.com/apurba2099/mute-marketing",
-    },
-    {
-      id: 5,
       title: "RateIt",
-      description: "Interactive weather app with beautiful data visualization",
-      backgroundImage: project_3,
-      type: "Movie Rating Website",
-      color: "#2a9407ff",
-      liveLink: "https://karmbhumi.fun/",
+      description:
+        "A movie rating app where users can search for films and view IMDB rating based details and rated by their own and bookmark they watched movie.",
+      backgroundImage: project_4,
+      type: "Movie Search & Rating App",
+      class: "Movie Search & Rating App",
+      color: "#ffff8b",
+      techStack: ["React Js", "Css", "IMDB API"],
+      liveLink: "https://rate-it-apd.vercel.app/",
       githubLink: "https://github.com/apurba2099/rate-it",
     },
     {
-      id: 6,
-      title: "Electrodex Lab",
-      description: "Interactive weather app with beautiful data visualization",
-      backgroundImage: project_3,
-      type: "Client-Project",
-      color: "#ff763d",
-      liveLink: "https://karmbhumi.fun/",
-      githubLink: "https://github.com/apurba2099/electrodex-lab",
-    },
-    {
-      id: 7,
+      id: 5,
       title: "Forkify",
-      description: "Interactive weather app with beautiful data visualization",
-      backgroundImage: project_3,
-      type: "Recipe Web App",
+      description:
+        "A recipe app that lets users search, view, and bookmark food recipes using an API.",
+      backgroundImage: project_5,
+      type: "Food Recipe App",
+      class: "Food Recipe App",
       color: "#f6c686",
-      liveLink: "https://tip-calculator-apd.vercel.app/",
+      techStack: ["HTML", "Css", "Javascript", "API", "MVC Architecture"],
+      liveLink: "https://apurba-forkifyrest.netlify.app/",
       githubLink: "https://github.com/apurba2099/Forkify",
     },
     {
-      id: 8,
-      title: "Tip Calculator",
-      description: "Interactive weather app with beautiful data visualization",
-      backgroundImage: project_3,
-      type: "Calculator App",
-      color: "#ffff8b",
-      liveLink: "https://tip-calculator-apd.vercel.app/",
-      githubLink: "https://github.com/apurba2099/tip-calculator",
+      id: 6,
+      title: "Billbuddies",
+      description:
+        "A simple bill-sharing web app that helps friends split expenses easily.",
+      backgroundImage: project_6,
+      type: "Bill Sharing Web-App",
+      class: "Bill Sharing Web-App",
+      color: "#ff763d",
+      techStack: ["React Js", "Css"],
+      liveLink: "https://bill-buddies-apd.vercel.app/",
+      githubLink: "https://github.com/apurba2099/bill-buddies",
+    },
+    {
+      id: 7,
+      title: "Guessing Game",
+      description:
+        "A fun number guessing game built for quick entertainment and JavaScript practice.",
+      backgroundImage: project_7,
+      type: "Game",
+      class: "Game",
+      color: "#3b82f6",
+      techStack: ["HTML", "Tailwind Css", "Javascript"],
+      liveLink: "https://apurba2099.github.io/Tailwind-Guessing-Game/",
+      githubLink: "https://github.com/apurba2099/Tailwind-Guessing-Game",
     },
     {
       id: 8,
-      title: "Guessing Game",
-      description: "Interactive weather app with beautiful data visualization",
-      backgroundImage: project_3,
-      type: "Game",
-      color: "#3b82f6",
-      liveLink: "https://tip-calculator-apd.vercel.app/",
-      githubLink: "https://github.com/apurba2099/Tailwind-Guessing-Game",
+      title: "Karmbhumi.fun",
+      description:
+        "An Indian Goverment Jobs preparations portal and social welfare platform built to promote learning and community initiatives.",
+      backgroundImage: project_8,
+      type: "client-project",
+      class: "Education and Social Welfare",
+      color: "#2a9407ff",
+      techStack: ["HTML", "Css", "CMS Software"],
+      liveLink: "https://karmbhumi.fun/",
+      githubLink: "https://github.com/apurba2099/karmbhumi",
+    },
+    {
+      id: 9,
+      title: "Electrodex Lab",
+      description:
+        "A professional website for a 3D printing startup highlighting products and services in West Bengal, Kalna.",
+      backgroundImage: project_9,
+      type: "client-project",
+      class: "3D Printing Start-up",
+      color: "#ff763d",
+      techStack: ["HTML", "Tailwind Css", "Javascript"],
+      liveLink: "https://electrodex-lab.vercel.app/",
+      githubLink: "https://github.com/apurba2099/electrodex-lab",
     },
   ];
 
   // Separate projects based on type
   const personalProjects = projects.filter(
-    (project) => project.type !== "Client-Project"
+    (project) => project.type !== "client-project"
   );
   const clientProjects = projects.filter(
-    (project) => project.type === "Client-Project"
+    (project) => project.type === "client-project"
   );
 
   // Render project card function
@@ -153,9 +199,31 @@ export default function Project() {
           }}
           className="project-type"
         >
-          <strong>{project.type}</strong>
+          <strong>{project.class}</strong>
         </span>
         <p className="project-description">{project.description}</p>
+
+        {/* --- TECH STACK SECTION --- */}
+        <div className="tech-stack">
+          <p className="tech-stack-name">
+            <strong>
+              <i class="fa-solid fa-code"></i> Tech Stack Use &bull;
+            </strong>
+          </p>
+          {project.techStack &&
+            project.techStack.map((tech, index) => (
+              <span
+                key={index}
+                className="tech-stack-type"
+                style={{
+                  border: `1px solid ${project.color}`,
+                  color: project.color,
+                }}
+              >
+                {tech}
+              </span>
+            ))}
+        </div>
       </div>
     </div>
   );

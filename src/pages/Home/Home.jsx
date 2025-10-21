@@ -50,26 +50,35 @@ export default function Portfolio() {
     {
       id: 1,
       title: "Pizzape",
-      description: "Full-stack e-commerce application with payment integration",
+      description:
+        "An online Pizza ordering website where users can browse menus and place pizza orders easily.",
       backgroundImage: project_1,
-      type: "Food Website",
+      type: "Piiza Ordering Website",
+      class: "Pizza Ordering Website",
       color: "#facc15",
+      liveLink: "https://pizzape.vercel.app/",
     },
     {
       id: 2,
       title: "AdminLTE",
-      description: "Productivity app with real-time collaboration features",
+      description:
+        "A CRUD-based admin dashboard for managing users login, add data, update data, delete data.",
       backgroundImage: project_2,
-      type: "CRUD APP",
+      type: "CRUD App",
+      class: "CRUD App",
       color: "#4f46e5",
+      liveLink: "https://admin-lte-app.vercel.app/",
     },
     {
       id: 3,
       title: "MUTE MARKETING",
-      description: "Interactive weather app with beautiful data visualization",
+      description:
+        "A digital marketing agency website designed to showcase services and client success stories and portfolio.",
       backgroundImage: project_3,
-      type: "Client-Project",
+      type: "client-project",
+      class: "Digital Marketing Agency",
       color: "#f1e504",
+      liveLink: "https://mute-market-v2.vercel.app/",
     },
   ];
 
@@ -174,7 +183,9 @@ export default function Portfolio() {
                     <strong>{project.title}</strong>
                   </p>
                   <span>
-                    <i class="fa fa-external-link" aria-hidden="true"></i>
+                    <a href={project.liveLink}>
+                      <i class="fa fa-external-link" aria-hidden="true"></i>
+                    </a>
                   </span>
                 </div>
                 <span
@@ -187,7 +198,7 @@ export default function Portfolio() {
                   }}
                   className="project-type"
                 >
-                  <strong> {project.type}</strong>
+                  <strong> {project.class}</strong>
                 </span>
                 <p style={{ padding: "2px 6px", margin: "4px" }}>
                   {project.description}
