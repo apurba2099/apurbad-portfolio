@@ -208,10 +208,17 @@ export default function Contact() {
             <i className="fa fa-envelope"></i> APURBADUTTA2099@GMAIL.COM
           </a>
           <h2>&lt;Apurba Dutta /&gt;</h2>
-          <a href="https://apurbad-portfolio.vercel.app" target="_blank">
+          <a href="https://apurbadutta.lol" target="_blank">
             &#128279; APURBAD-PORTFOLIO
           </a>
         </div>
+      </section>
+
+      {/* Resume Section */}
+      <section className="resume-section">
+        <a className="resume-btn" href="./ApurbaDutta_Resume.pdf" download="ApurbaDutta_Resume.pdf">
+          <i className="fa-solid fa-download"></i>Download My CV
+        </a>
       </section>
 
       {/* Toaster Section  */}
