@@ -20,9 +20,8 @@ This portfolio serves as a digital resume and creative space where I present my 
 | Category | Technologies |
 |-----------|---------------|
 | **Frontend** | HTML5, CSS3, JavaScript, React |
-| **Styling** | Tailwind CSS / Bootstrap / SCSS |
-| **Backend** | Node.js, Express.js |
-| **Deployment** | GitHub Pages / Vercel / Netlify |
+| **Styling** | CSS3 / Font Awsome CDN |
+| **Deployment** | Production Godaddy / Vercel |
 | **Version Control** | Git & GitHub |
 
 ---
