@@ -66,7 +66,7 @@ export default function Project() {
       class: "Digital Marketing Agency",
       color: "#f1e504",
       techStack: ["React Js", "Css", "WEB3 Form API"],
-      liveLink: "https://mute-market-v2.vercel.app/",
+      liveLink: "https://mutemarketing.com/",
       githubLink: "https://github.com/apurba2099/mute-market-v2",
     },
     {
