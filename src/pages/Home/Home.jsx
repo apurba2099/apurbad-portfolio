@@ -77,7 +77,7 @@ export default function Portfolio() {
       type: "client-project",
       class: "Digital Marketing Agency",
       color: "#f1e504",
-      liveLink: "https://mute-market-v2.vercel.app/",
+      liveLink: "https://mutemarketing.com/",
     },
   ];
 
