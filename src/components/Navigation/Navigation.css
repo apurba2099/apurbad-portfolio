@@ -1,20 +1,26 @@
-/* Bottom Navigation */
+/* ============================================================
+   BOTTOM NAVIGATION — Polished AMOLED / Light theme aware
+   ============================================================ */
 .bottom-nav {
   position: fixed;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 8px;
-  padding: 12px;
-  background-color: rgba(26, 26, 26, 0.62);
-  backdrop-filter: blur(10px);
-  border: 1px solid #2a2a2a;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  gap: 6px;
+  padding: 10px 14px;
+  background-color: var(--nav-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--nav-border);
+  border-radius: 22px;
+  box-shadow: var(--shadow-nav);
   z-index: 1000;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  will-change: transform;
 }
 
+/* Nav Item */
 .nav-item {
   width: 48px;
   height: 48px;
@@ -23,79 +29,98 @@
   justify-content: center;
   background: transparent;
   border: none;
-  border-radius: 12px;
-  color: #888;
+  border-radius: 14px;
+  color: var(--nav-icon);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  font-size: 18px;
+  position: relative;
 }
 
 .nav-item:hover {
-  background-color: #2a2a2a;
-  color: #fff;
+  background-color: var(--accent-soft);
+  color: var(--nav-icon-active);
+  transform: translateY(-1px);
+}
+
+.nav-item:active {
+  transform: translateY(0) scale(0.95);
 }
 
 .nav-item.active {
-  background-color: #3a3a3a;
-  color: #fff;
+  background-color: var(--nav-item-active);
+  color: var(--nav-icon-active);
 }
 
-.nav-item svg {
-  width: 24px;
-  height: 24px;
+/* Active dot indicator */
+.nav-item.active::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--nav-icon-active);
 }
 
-/* Tooltip styles */
+/* Tooltip */
 .tooltip {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .tooltip .tooltip-text {
   position: absolute;
-  bottom: 120%;
+  bottom: calc(100% + 10px);
   left: 50%;
-  transform: translateX(-50%) translateY(5px);
-  background-color: #fff;
-  color: #000;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 1rem;
+  transform: translateX(-50%) translateY(6px);
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-text);
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.25s ease;
   pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  letter-spacing: 0.02em;
 }
 
- .tooltip:hover .tooltip-text {
+.tooltip:hover .tooltip-text {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
 }
 
-/* Optional tiny arrow */
+/* Tooltip arrow */
 .tooltip .tooltip-text::after {
   content: "";
   position: absolute;
   top: 100%;
   left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
+  margin-left: -4px;
+  border-width: 4px;
   border-style: solid;
-  border-color: rgba(255, 255, 255, 0.9) transparent transparent transparent;
+  border-color: var(--tooltip-bg) transparent transparent transparent;
 }
 
-/* Responsive Design  */
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 @media (max-width: 768px) {
   .bottom-nav {
     bottom: 12px;
-    padding: 8px;
+    padding: 8px 10px;
+    gap: 4px;
   }
 
   .nav-item {
     width: 44px;
     height: 44px;
+    font-size: 16px;
+    border-radius: 12px;
   }
 }

@@ -1,87 +1,93 @@
-/* Archive Container */
+/* ============================================================
+   ARCHIVE PAGE — AMOLED/Light theme aware
+   ============================================================ */
 .archive {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 60px 20px 100px;
-  color: #ffffff;
+  padding: 56px 24px 120px;
   min-height: 100vh;
 }
 
-/* Archive Section */
-.archive-section {
-  margin-bottom: 60px;
-}
-
-/* Archive Header */
+/* ── Header ──────────────────────────────────────────────── */
 .archive-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 32px;
+  gap: 14px;
+  margin-bottom: 36px;
 }
 
 .archive-header h2 {
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1.8rem;
+  font-weight: 700;
   margin: 0;
-  color: #ffffff;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .back-btn {
-  background: none;
-  border: none;
-  color: #ffffff;
+  width: 40px;
+  height: 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-primary);
   cursor: pointer;
-  font-size: 20px;
-  padding: 8px;
+  font-size: 16px;
   display: flex;
   align-items: center;
-  transition: color 0.3s ease;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .back-btn:hover {
-  color: #d1d5db;
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+  transform: translateX(-2px);
 }
 
-.fa-folder-open {
-  font-size: 1.5rem;
-}
-
-/* Gallery Grid */
+/* ── Gallery Grid ────────────────────────────────────────── */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  gap: 18px;
 }
 
+/* ── Gallery Card ────────────────────────────────────────── */
 .gallery-card {
   position: relative;
   width: 100%;
   height: 280px;
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
-  background-color: #1a1a1a;
-  border: 1px solid #2a2a2a;
-  transition: all 0.3s ease;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  will-change: transform;
 }
 
 .gallery-card:hover {
   transform: translateY(-4px);
-  border-color: #3a3a3a;
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-card);
 }
 
 .gallery-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform 0.45s ease;
 }
 
 .gallery-card:hover img {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
+/* ── Hover Overlay ───────────────────────────────────────── */
 .gallery-overlay {
   position: absolute;
   inset: 0;
@@ -93,40 +99,60 @@
 }
 
 .gallery-card:hover .gallery-overlay {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.52);
 }
 
 .gallery-overlay i {
   color: #ffffff;
   font-size: 2rem;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: scale(0.85);
 }
 
 .gallery-card:hover .gallery-overlay i {
   opacity: 1;
+  transform: scale(1);
 }
 
-/* Fullscreen Modal */
+/* ── Quote caption on card (optional hover label) ─────────── */
+.gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 14px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.75));
+  color: #fff;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.gallery-card:hover .gallery-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Fullscreen Modal ────────────────────────────────────── */
 .fullscreen-modal {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color: rgba(0, 0, 0, 0.96);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2000;
-  padding: 20px;
-  animation: fadeIn 0.3s ease;
+  padding: 24px;
+  animation: fadeIn 0.25s ease;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .close-btn {
@@ -134,83 +160,76 @@
   top: 20px;
   right: 20px;
   background: rgba(255, 255, 255, 0.1);
-  border: none;
+  border: 1px solid rgba(255,255,255,0.15);
   color: #ffffff;
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   z-index: 2001;
+  backdrop-filter: blur(8px);
 }
 
 .close-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: rotate(90deg);
+  background: rgba(255, 255, 255, 0.18);
+  transform: rotate(90deg) scale(1.08);
 }
 
 .modal-content {
   position: relative;
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 90vw;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: zoomIn 0.3s ease;
+  animation: zoomIn 0.25s ease;
 }
 
 @keyframes zoomIn {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(0.88); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
 }
 
 .modal-content img {
   max-width: 100%;
-  max-height: calc(90vh - 120px);
+  max-height: calc(90vh - 130px);
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 .image-quote-overlay {
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
-  padding: 20px 30px;
-  border-radius: 12px;
-  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 18px 28px;
+  border-radius: 14px;
+  margin-top: 18px;
   max-width: 600px;
   text-align: center;
 }
 
 .image-quote-overlay p {
   margin: 0;
-  color: #ffffff;
-  font-size: 1.1rem;
-  line-height: 1.6;
+  color: #f0f0f0;
+  font-size: 1rem;
+  line-height: 1.65;
   font-style: italic;
 }
 
-/* Responsive Design */
+/* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 768px) {
   .archive {
-    padding: 40px 16px 100px;
+    padding: 40px 18px 120px;
   }
 
   .archive-header h2 {
-    font-size: 1.5rem;
-  }
-
-  .fa-folder-open {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
   }
 
   .gallery-grid {
@@ -223,16 +242,16 @@
   }
 
   .close-btn {
-    top: 10px;
-    right: 10px;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
   }
 
   .modal-content {
-    max-width: 95%;
-    max-height: 95%;
+    max-width: 95vw;
+    max-height: 95vh;
   }
 
   .modal-content img {
@@ -240,11 +259,11 @@
   }
 
   .image-quote-overlay {
-    padding: 16px 20px;
-    margin-top: 16px;
+    padding: 14px 18px;
+    margin-top: 14px;
   }
 
   .image-quote-overlay p {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
   }
 }
