@@ -62,7 +62,11 @@ export default function Contact() {
 
   const [showSuccess, setShowSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -95,7 +99,6 @@ export default function Contact() {
 
   return (
     <div className="contact">
-
       {/* Contact Section */}
       <section id="contact" className="contact-section">
         <div className="contact-header">
@@ -165,7 +168,11 @@ export default function Contact() {
           </div>
 
           <div className="form-actions">
-            <button type="submit" className="submit-button" disabled={isSubmitting}>
+            <button
+              type="submit"
+              className="submit-button"
+              disabled={isSubmitting}
+            >
               {isSubmitting ? "Sending…" : "Send Message"}
             </button>
           </div>
@@ -200,8 +207,12 @@ export default function Contact() {
           <a href="mailto:apurbadutta2099@gmail.com">
             <i className="fa fa-envelope"></i> apurbadutta2099@gmail.com
           </a>
-          <h2>&lt; Apurba Dutta /&gt;</h2>
-          <a href="https://apurbadutta.lol" target="_blank" rel="noopener noreferrer">
+          <h2>&lt;Apurba Dutta/&gt;</h2>
+          <a
+            href="https://apurbadutta.lol"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             🔗 apurbadutta.lol
           </a>
         </div>
