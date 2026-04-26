@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import profileImage from "..//../assets/images/profile.jpg";
 import project_10 from "..//../assets/images/project-10.png";
-import project_2 from "..//../assets/images/project-2.png";
+import project_11 from "..//../assets/images/project-11.png";
 import project_3 from "..//../assets/images/project-3.png";
 import {
   FaHtml5,
@@ -65,27 +65,27 @@ const techStack = [
 
 // Only 3 featured / recent projects shown on home
 const recentProjects = [
-{
-  id: 1,
-  title: "BhaiLog Chat App",
-  description:
-    "A real-time chat application where users can connect, send messages, and share media instantly from anywhere with a smooth and simple login experience.",
-  backgroundImage: project_10,
-  type: "Chat Application",
-  class: "Chat Application",
-  color: "#4f46e5",
-  liveLink: "https://bhai-log.vercel.app/login",
-},
   {
-    id: 2,
-    title: "AdminLTE",
+    id: 1,
+    title: "BhaiLog Chat App",
     description:
-      "A CRUD-based admin dashboard for managing users login, add data, update data, delete data.",
-    backgroundImage: project_2,
-    type: "CRUD App",
-    class: "CRUD App",
+      "A real-time chat application where users can connect, send messages, and share media instantly from anywhere with a smooth and simple login experience.",
+    backgroundImage: project_10,
+    type: "Chat Application",
+    class: "Chat Application",
     color: "#4f46e5",
-    liveLink: "https://admin-lte-app.vercel.app/",
+    liveLink: "https://bhai-log.vercel.app/",
+  },
+  {
+    id: 12,
+    title: "Doctor Appointment System",
+    description:
+      "A role-based appointment system where patients can search and book doctors by location, and pharmacy admins can manage and schedule patient appointments efficiently.",
+    backgroundImage: project_11,
+    type: "personal-project",
+    class: "Healthcare Application",
+    color: "#0895d9",
+    liveLink: "https://doctor-appointment-apd.vercel.app/",
   },
   {
     id: 3,
@@ -146,7 +146,6 @@ export default function Home() {
 
   return (
     <div className="home">
-
       {/* ── Hero Section ──────────────────────────────────────── */}
       <section id="home" className="hero-section">
         <div className="hero-content">
@@ -157,7 +156,10 @@ export default function Home() {
           </div>
           <div className="profile-image">
             <img src={profileImage} alt="Apurba Dutta — Web Developer" />
-            <span className="status-indicator" title="Available for work"></span>
+            <span
+              className="status-indicator"
+              title="Available for work"
+            ></span>
           </div>
         </div>
       </section>
@@ -166,16 +168,18 @@ export default function Home() {
       <section className="about-section">
         <h2 className="section-heading">Who am I ?</h2>
         <p className="about-text">
-          I&apos;m <strong>Apurba Dutta</strong> — a passionate full-stack web developer
-          from West Bengal, India. I love crafting beautiful, performant web
-          applications that solve real problems. With hands-on experience in
-          <strong> React, Node.js, Express</strong>, and <strong>MongoDB</strong>, I build
-          complete products from design to deployment.{" "}
-          <br /><br />
-          Whether it&apos;s a client landing page, a data-driven dashboard, or an
-          e-commerce flow — I bring ideas to life with clean code and an eye for
-          detail. I believe great software is not just functional, it&apos;s a
-          pleasure to use.
+          I&apos;m <strong>Apurba Dutta</strong> — a passionate full-stack web
+          developer from West Bengal, India. I love crafting beautiful,
+          performant web applications that solve real problems. With hands-on
+          experience in
+          <strong> React, Node.js, Express</strong>, and{" "}
+          <strong>MongoDB</strong>, I build complete products from design to
+          deployment. <br />
+          <br />
+          Whether it&apos;s a client landing page, a data-driven dashboard, or
+          an e-commerce flow — I bring ideas to life with clean code and an eye
+          for detail. I believe great software is not just functional, it&apos;s
+          a pleasure to use.
         </p>
 
         {/* DTS Experience Badge */}
@@ -256,7 +260,11 @@ export default function Home() {
       {/* ── Find Me Here Section ──────────────────────────────── */}
       <section className="social-section">
         <h2 className="section-heading">
-          Find Me Here <i className="fa-solid fa-magnifying-glass" style={{ fontSize: "1.1rem" }}></i>
+          Find Me Here{" "}
+          <i
+            className="fa-solid fa-magnifying-glass"
+            style={{ fontSize: "1.1rem" }}
+          ></i>
         </h2>
         <div className="social-grid">
           {socialLinks.map((social, index) => (
@@ -274,7 +282,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
     </div>
   );
 }

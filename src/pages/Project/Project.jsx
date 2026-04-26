@@ -11,6 +11,7 @@ import project_7 from "..//../assets/images/project-7.png";
 import project_8 from "..//../assets/images/project-8.png";
 import project_9 from "..//../assets/images/project-9.png";
 import project_10 from "..//../assets/images/project-10.png";
+import project_11 from "..//../assets/images/project-11.png";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 // To add a new project: just add an entry to this array.
@@ -159,9 +160,27 @@ const projects = [
       "Multer",
       "Cloudinary",
     ],
-    liveLink: "https://bhai-log.vercel.app/login",
+    liveLink: "https://bhai-log.vercel.app/",
     githubLink: "https://github.com/apurba2099/bhai-log",
   },
+  {
+  id: 11,
+  title: "Doctor Appointment System",
+  description:
+    "A role-based doctor appointment system with separate interfaces for patients and pharmacy administrators. Patients can search and book doctors based on their location, while pharmacy admins can efficiently manage and schedule patient appointments with doctors in their local network.",
+  backgroundImage: project_11,
+  type: "personal-project",
+  class: "Healthcare Application",
+  color: "#0895d9",
+  techStack: [
+    "MongoDB",
+    "Express.js",
+    "React",
+    "Node.js"
+  ],
+  liveLink: "https://doctor-appointment-apd.vercel.app/",
+  githubLink: "https://github.com/apurba2099/doctor-appointment",
+}
 ];
 
 // ─── COMPONENT ───────────────────────────────────────────────────────────────
