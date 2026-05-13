@@ -73,6 +73,17 @@ export default function Navigation() {
         <i className="fa-solid fa-box-archive"></i>
         <span className="tooltip-text">Archive</span>
       </button>
+
+      {/* Guestbook */}
+      <button
+        className={`nav-item tooltip ${
+          currentPath === "/guestbook" ? "active" : ""
+        }`}
+        onClick={() => handleNavClick("/guestbook", 4)}
+      >
+        <i className="fa-solid fa-book-open"></i>
+        <span className="tooltip-text">Guestbook</span>
+      </button>
     </nav>
   );
 }
