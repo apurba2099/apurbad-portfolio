@@ -1,6 +1,7 @@
 // ─── Firebase v9 Modular SDK ──────────────────────────────────────────────────
-// Replace the firebaseConfig values below with your own from:
-// Firebase Console → Project Settings → General → Your apps → Firebase SDK snippet
+// Config values are loaded from .env (never committed to git).
+// For local dev: copy .env.example → .env and fill in your values.
+// For Vercel: add each VITE_FIREBASE_* variable in Project → Settings → Environment Variables.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { initializeApp } from "firebase/app";
@@ -8,13 +9,13 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB40yFO52Z1CmNA1usU2qCZG_OPJzNwzQo",
-  authDomain: "portfolio-users-2003.firebaseapp.com",
-  projectId: "portfolio-users-2003",
-  storageBucket: "portfolio-users-2003.firebasestorage.app",
-  messagingSenderId: "196481942846",
-  appId: "1:196481942846:web:8e0d6a73f26f6bf838d86f",
-  measurementId: "G-9488CY1RBZ"
+  apiKey:            import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain:        import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId:         import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket:     import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId:             import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId:     import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);

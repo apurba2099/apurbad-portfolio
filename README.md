@@ -92,8 +92,32 @@ src/
 2. **Authentication → Sign-in method** → Enable **Google**
 3. **Firestore Database** → Create in **Test mode**
 4. **Project Settings → Web app** → copy `firebaseConfig`
-5. Paste into `src/firebase.js`
-6. **Authentication → Settings → Authorized domains** → add your domain + `localhost`
+5. **Authentication → Settings → Authorized domains** → add your domain + `localhost`
+
+### Environment variables
+
+Firebase credentials are **never hardcoded** — they live in a `.env` file that is gitignored.
+
+```bash
+# 1. Copy the template
+cp .env.example .env
+
+# 2. Fill in your values from Firebase Console
+```
+
+`.env` (gitignored — stays local):
+```env
+VITE_FIREBASE_API_KEY=AIzaSy...
+VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your-project
+VITE_FIREBASE_STORAGE_BUCKET=your-project.firebasestorage.app
+VITE_FIREBASE_MESSAGING_SENDER_ID=123456789
+VITE_FIREBASE_APP_ID=1:123...
+VITE_FIREBASE_MEASUREMENT_ID=G-XXXXXXX
+```
+
+> **Vercel deployment** — add the same `VITE_FIREBASE_*` keys in:  
+> Vercel Dashboard → Project → Settings → **Environment Variables**
 
 ### Recommended Firestore security rules (production)
 ```
