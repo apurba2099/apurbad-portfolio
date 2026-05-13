@@ -150,7 +150,7 @@
   width: 22px;
   height: 22px;
   border: 2.5px solid var(--border);
-  border-top-color: #8b5cf6;
+  border-top-color: var(--text-primary);
   border-radius: 50%;
   animation: gb-spin 0.7s linear infinite;
   vertical-align: middle;
@@ -240,8 +240,7 @@
 }
 
 .gb-composer:focus-within {
-  border-color: rgba(139, 92, 246, 0.45);
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.08);
+  border-color: var(--border-hover);
 }
 
 .gb-composer-header {
@@ -303,7 +302,7 @@
 
 .gb-textarea:focus {
   outline: none;
-  border-color: rgba(139, 92, 246, 0.5);
+  border-color: var(--input-focus);
   background: var(--bg-secondary);
 }
 
@@ -335,8 +334,8 @@
   align-items: center;
   gap: 7px;
   padding: 10px 22px;
-  background: #8b5cf6;
-  color: #fff;
+  background: var(--btn-bg);
+  color: var(--btn-text);
   border: none;
   border-radius: 10px;
   font-size: 0.9rem;
@@ -348,9 +347,8 @@
 }
 
 .gb-post-btn:hover:not(:disabled) {
-  background: #7c3aed;
+  background: var(--btn-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
 }
 
 .gb-post-btn:active:not(:disabled) {
@@ -393,11 +391,12 @@
   min-width: 26px;
   height: 22px;
   padding: 0 7px;
-  background: rgba(139, 92, 246, 0.18);
-  color: #a78bfa;
+  background: var(--bg-card-hover);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
   border-radius: 100px;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .gb-msgs-loading {
@@ -451,11 +450,11 @@
 
 /* Own message accent */
 .gb-message-card--mine {
-  border-left: 3px solid rgba(139, 92, 246, 0.6);
+  border-left: 3px solid var(--border-hover);
 }
 
 .gb-message-card--mine:hover {
-  border-left-color: rgba(139, 92, 246, 0.85);
+  border-left-color: var(--accent);
 }
 
 @keyframes gb-card-in {
@@ -492,8 +491,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-  color: #fff;
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border: 1px solid var(--border-hover);
   font-weight: 700;
   font-size: 0.9rem;
 }
@@ -516,12 +516,13 @@
 /* "you" badge on own messages */
 .gb-you-badge {
   font-size: 0.68rem;
-  font-weight: 600;
-  color: #a78bfa;
-  background: rgba(139, 92, 246, 0.15);
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-card-hover);
+  border: 1px solid var(--border);
   border-radius: 100px;
   padding: 1px 7px;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
 }
 
 .gb-message-date {

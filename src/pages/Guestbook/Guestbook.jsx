@@ -155,8 +155,14 @@ export default function Guestbook() {
       setPostError("Message must be 280 characters or fewer.");
       return;
     }
+
+    // ── Optimistic update: clear input instantly so UI feels fast.
+    // The Firestore local cache will surface the new doc before the
+    // server confirms, so the message appears in the feed right away.
+    setMessage("");
     setPosting(true);
     setPostError("");
+
     try {
       await addDoc(collection(db, "guestbook"), {
         uid: user.uid,
@@ -165,9 +171,10 @@ export default function Guestbook() {
         message: trimmed,
         createdAt: serverTimestamp(),
       });
-      setMessage("");
       textareaRef.current?.focus();
     } catch (err) {
+      // Restore message on failure so the user doesn't lose their text
+      setMessage(trimmed);
       setPostError("Failed to post. Please try again.");
       console.error("Post error:", err);
     } finally {
