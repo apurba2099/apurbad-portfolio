@@ -88,7 +88,6 @@ export default function Guestbook() {
 
   // Compose
   const [message, setMessage] = useState("");
-  const [posting, setPosting] = useState(false);
   const [postError, setPostError] = useState("");
   const textareaRef = useRef(null);
 
@@ -148,7 +147,7 @@ export default function Guestbook() {
     }
   };
 
-  const handlePost = async () => {
+  const handlePost = () => {
     const trimmed = message.trim();
     if (!trimmed || !user) return;
     if (trimmed.length > 280) {
@@ -156,30 +155,26 @@ export default function Guestbook() {
       return;
     }
 
-    // ── Optimistic update: clear input instantly so UI feels fast.
-    // The Firestore local cache will surface the new doc before the
-    // server confirms, so the message appears in the feed right away.
+    // Clear immediately — button disables via !message.trim() so no double-post.
+    // addDoc writes to local IndexedDB cache first → onSnapshot fires instantly.
+    // No await needed: spinner is gone, UX is instant.
     setMessage("");
-    setPosting(true);
     setPostError("");
 
-    try {
-      await addDoc(collection(db, "guestbook"), {
-        uid: user.uid,
-        name: user.displayName || "Anonymous",
-        photoURL: user.photoURL || "",
-        message: trimmed,
-        createdAt: serverTimestamp(),
-      });
-      textareaRef.current?.focus();
-    } catch (err) {
-      // Restore message on failure so the user doesn't lose their text
+    addDoc(collection(db, "guestbook"), {
+      uid: user.uid,
+      name: user.displayName || "Anonymous",
+      photoURL: user.photoURL || "",
+      message: trimmed,
+      createdAt: serverTimestamp(),
+    }).catch((err) => {
+      // Restore text so the user doesn't lose their message
       setMessage(trimmed);
       setPostError("Failed to post. Please try again.");
       console.error("Post error:", err);
-    } finally {
-      setPosting(false);
-    }
+    });
+
+    textareaRef.current?.focus();
   };
 
   const handleKeyDown = (e) => {
@@ -263,13 +258,9 @@ export default function Guestbook() {
                   id="guestbook-post-btn"
                   className="gb-post-btn"
                   onClick={handlePost}
-                  disabled={posting || !message.trim() || overLimit}
+                  disabled={!message.trim() || overLimit}
                 >
-                  {posting ? (
-                    <><span className="gb-spinner gb-spinner--sm"></span>Posting…</>
-                  ) : (
-                    <><i className="fa-solid fa-paper-plane"></i>Post</>
-                  )}
+                  <i className="fa-solid fa-paper-plane"></i>Post
                 </button>
               </div>
 

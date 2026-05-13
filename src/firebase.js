@@ -9,7 +9,7 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import {
   initializeFirestore,
   persistentLocalCache,
-  persistentMultipleTabManager,
+  persistentSingleTabManager,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -27,10 +27,12 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 
-// Persistent local cache: writes hit IndexedDB first → onSnapshot fires instantly
-// even before the server round-trip completes.
+// persistentSingleTabManager: one stable connection per tab.
+// Unlike MultipleTabManager, auth state changes (login/logout) do NOT
+// drop or hand off the Firestore listener — so messages stay visible
+// for everyone regardless of whether they are signed in.
 export const db = initializeFirestore(app, {
   localCache: persistentLocalCache({
-    tabManager: persistentMultipleTabManager(),
+    tabManager: persistentSingleTabManager({ forceOwnership: true }),
   }),
 });
