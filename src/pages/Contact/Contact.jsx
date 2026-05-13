@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePageTitle } from "../../hooks/usePageTitle";
 import { useNavigate } from "react-router-dom";
 import {
   FaLinkedin,
@@ -59,6 +60,7 @@ const WEB3_ACCESS_KEY = "d16f0bec-44b1-4c37-8c33-4d264b2b50a2";
 
 export default function Contact() {
   const navigate = useNavigate();
+  usePageTitle("Contact"); // title → Contact — apurbadutta.lol
 
   const [showSuccess, setShowSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);

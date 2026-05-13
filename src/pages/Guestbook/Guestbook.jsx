@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { usePageTitle } from "../../hooks/usePageTitle";
 import { useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import {
@@ -80,6 +81,7 @@ function MessageCard({ msg, isOwn }) {
 
 export default function Guestbook() {
   const navigate = useNavigate();
+  usePageTitle("Guestbook"); // title → Guestbook — apurbadutta.lol
 
   // Auth
   const [user, setUser] = useState(null);

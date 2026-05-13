@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import { usePageTitle } from "../../hooks/usePageTitle";
 import profileImage from "..//../assets/images/profile.jpg";
+import coverPhoto from "..//../assets/images/cover-photo.png";
 import project_10 from "..//../assets/images/project-10.png";
 import project_11 from "..//../assets/images/project-11.png";
 import project_3 from "..//../assets/images/project-3.png";
@@ -143,26 +145,37 @@ const socialLinks = [
 
 export default function Home() {
   const navigate = useNavigate();
+  usePageTitle(null); // title → apurbadutta.lol
 
   return (
     <div className="home">
-      {/* ── Hero Section ──────────────────────────────────────── */}
-      <section id="home" className="hero-section">
-        <div className="hero-content">
-          <div className="hero-text">
-            <p className="greeting">Hey 👋 I am</p>
-            <h1 className="name">Apurba Dutta</h1>
-            <p className="title">&lt;Web Developer /&gt;</p>
+      {/* ── Hero Section ──────────────────────────────────────────── */}
+      <div className="hero-banner">
+        <img
+          src={coverPhoto}
+          alt="Cover"
+          className="hero-banner-img"
+          aria-hidden="true"
+        />
+        <div className="hero-banner-overlay"></div>
+
+        <section id="home" className="hero-section">
+          <div className="hero-content">
+            <div className="hero-text">
+              <p className="greeting">Hey 👋 I am</p>
+              <h1 className="name">Apurba Dutta</h1>
+              <p className="title">&lt;Web Developer /&gt;</p>
+            </div>
+            <div className="profile-image">
+              <img src={profileImage} alt="Apurba Dutta — Web Developer" />
+              <span
+                className="status-indicator"
+                title="Available for work"
+              ></span>
+            </div>
           </div>
-          <div className="profile-image">
-            <img src={profileImage} alt="Apurba Dutta — Web Developer" />
-            <span
-              className="status-indicator"
-              title="Available for work"
-            ></span>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* ── Who am I Section ──────────────────────────────────── */}
       <section className="about-section">

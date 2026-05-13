@@ -1,5 +1,6 @@
 import "./Project.css";
 import { useNavigate } from "react-router-dom";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 import project_1 from "..//../assets/images/project-1.png";
 import project_2 from "..//../assets/images/project-2.png";
@@ -187,6 +188,7 @@ const projects = [
 
 export default function Project() {
   const navigate = useNavigate();
+  usePageTitle("Projects"); // title → Projects — apurbadutta.lol
 
   // Split by type
   const personalProjects = projects.filter((p) => p.type !== "client-project");

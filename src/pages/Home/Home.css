@@ -4,7 +4,7 @@
 .home {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 56px 24px 120px;
+  padding: 0 0 120px;
 }
 
 /* ============================================================
@@ -28,10 +28,53 @@
 }
 
 /* ============================================================
+   HERO BANNER (cover photo behind hero)
+   ============================================================ */
+.hero-banner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0 0 32px 32px;
+  margin-bottom: 64px;
+  min-height: 340px;
+  /* Fade bottom edge into page background */
+  box-shadow:
+    0 1px 0 0 var(--border),
+    inset 0 -60px 60px -20px var(--bg-primary);
+}
+
+.hero-banner-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  z-index: 0;
+  filter: brightness(0.88) saturate(1.08);
+}
+
+.hero-banner-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    170deg,
+    rgba(0, 0, 0, 0.22) 0%,
+    rgba(0, 0, 0, 0.42) 40%,
+    rgba(0, 0, 0, 0.68) 75%,
+    rgba(0, 0, 0, 0.82) 100%
+  );
+}
+
+/* ============================================================
    HERO SECTION
    ============================================================ */
 .hero-section {
-  margin-bottom: 72px;
+  position: relative;
+  z-index: 2;
+  padding: 64px 24px 72px;
 }
 
 .hero-content {
@@ -45,9 +88,10 @@
   flex: 1;
 }
 
+/* Hero text — always white since banner overlay is dark */
 .greeting {
   font-size: 1rem;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.75);
   margin-bottom: 8px;
   font-weight: 400;
   letter-spacing: 0.01em;
@@ -58,23 +102,23 @@
   font-weight: 800;
   margin-bottom: 10px;
   line-height: 1.08;
-  color: var(--text-primary);
+  color: #ffffff;
   letter-spacing: -0.04em;
 }
 
 .title {
   font-size: 1.1rem;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.65);
   font-weight: 400;
   font-family: "Courier New", monospace;
   letter-spacing: 0.02em;
 }
 
-/* Profile image */
+/* Profile image — premium floating circle */
 .profile-image {
   position: relative;
-  width: 190px;
-  height: 190px;
+  width: 196px;
+  height: 196px;
   flex-shrink: 0;
 }
 
@@ -83,12 +127,23 @@
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--border-hover);
-  transition: border-color 0.3s ease;
+  /* Subtle white ring + dark gap ring + deep shadow */
+  border: 2.5px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 0 0 5px rgba(0, 0, 0, 0.38),
+    0 0 0 6.5px rgba(255, 255, 255, 0.10),
+    0 20px 56px rgba(0, 0, 0, 0.52),
+    0 4px 12px rgba(0, 0, 0, 0.30);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .profile-image:hover img {
-  border-color: var(--text-secondary);
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 0 0 5px rgba(0, 0, 0, 0.45),
+    0 0 0 6.5px rgba(255, 255, 255, 0.18),
+    0 24px 64px rgba(0, 0, 0, 0.58),
+    0 4px 14px rgba(0, 0, 0, 0.36);
 }
 
 /* Online status dot */
@@ -393,7 +448,16 @@
    ============================================================ */
 @media (max-width: 768px) {
   .home {
-    padding: 40px 18px 120px;
+    padding: 0 0 120px;
+  }
+
+  .hero-banner {
+    border-radius: 0 0 20px 20px;
+    margin-bottom: 40px;
+  }
+
+  .hero-section {
+    padding: 48px 18px 56px;
   }
 
   .hero-content {

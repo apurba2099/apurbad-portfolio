@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePageTitle } from "../../hooks/usePageTitle";
 import { useNavigate } from "react-router-dom";
 import "./Archive.css";
 
@@ -60,6 +61,7 @@ const archiveImages = [
 
 export default function Archive() {
   const navigate = useNavigate();
+  usePageTitle("Archive"); // title → Archive — apurbadutta.lol
   const [selectedImage, setSelectedImage] = useState(null);
 
   const openImage = (item) => setSelectedImage(item);
