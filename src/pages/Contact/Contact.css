@@ -250,7 +250,8 @@
 }
 
 .mail-box {
-  min-width: 260px;
+  width: 100%;
+  max-width: 360px;
   background-color: var(--mail-bg);
   padding: 20px 24px;
   border: 1px solid var(--mail-border);
@@ -355,5 +356,33 @@
 
   .social-card {
     padding: 22px 14px;
+  }
+}
+
+/* ── Small phones (≤ 480px) ─────────────────────────────── */
+@media (max-width: 480px) {
+  .contact {
+    padding: 32px 14px 120px;
+  }
+
+  .contact-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .social-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .social-card {
+    padding: 18px 10px;
+  }
+
+  .mail-box {
+    padding: 16px 16px;
+  }
+
+  .mail-box h2 {
+    font-size: 1.4rem;
   }
 }

@@ -1,41 +1,18 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
 import "./Navigation.css";
 
 export default function Navigation() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [_, setActiveTooltip] = useState(null); //activeTooltip
-
-  // detect active route automatically
   const currentPath = location.pathname;
-
-  const handleNavClick = (path, index) => {
-    // Check if on mobile/touch device
-    const isTouchDevice =
-      "ontouchstart" in window || navigator.maxTouchPoints > 0;
-
-    if (isTouchDevice) {
-      // Show tooltip immediately
-      setActiveTooltip(index);
-
-      // Navigate after a short delay (600ms to see tooltip)
-      setTimeout(() => {
-        setActiveTooltip(null);
-        navigate(path);
-      }, 500);
-    } else {
-      // Desktop: navigate immediately
-      navigate(path);
-    }
-  };
 
   return (
     <nav className="bottom-nav">
       {/* Home */}
       <button
         className={`nav-item tooltip ${currentPath === "/" ? "active" : ""}`}
-        onClick={() => handleNavClick("/", 0)}
+        onClick={() => navigate("/")}
+        aria-label="Home"
       >
         <i className="fa-solid fa-house"></i>
         <span className="tooltip-text">Home</span>
@@ -43,10 +20,9 @@ export default function Navigation() {
 
       {/* Projects */}
       <button
-        className={`nav-item tooltip ${
-          currentPath === "/project" ? "active" : ""
-        }`}
-        onClick={() => handleNavClick("/project", 1)}
+        className={`nav-item tooltip ${currentPath === "/project" ? "active" : ""}`}
+        onClick={() => navigate("/project")}
+        aria-label="Projects"
       >
         <i className="fa-solid fa-screwdriver-wrench"></i>
         <span className="tooltip-text">Projects</span>
@@ -54,10 +30,9 @@ export default function Navigation() {
 
       {/* Contact */}
       <button
-        className={`nav-item tooltip ${
-          currentPath === "/contact" ? "active" : ""
-        }`}
-        onClick={() => handleNavClick("/contact", 2)}
+        className={`nav-item tooltip ${currentPath === "/contact" ? "active" : ""}`}
+        onClick={() => navigate("/contact")}
+        aria-label="Contact"
       >
         <i className="fa-solid fa-envelopes-bulk"></i>
         <span className="tooltip-text">Contact</span>
@@ -65,10 +40,9 @@ export default function Navigation() {
 
       {/* Archive */}
       <button
-        className={`nav-item tooltip ${
-          currentPath === "/archive" ? "active" : ""
-        }`}
-        onClick={() => handleNavClick("/archive", 3)}
+        className={`nav-item tooltip ${currentPath === "/archive" ? "active" : ""}`}
+        onClick={() => navigate("/archive")}
+        aria-label="Archive"
       >
         <i className="fa-solid fa-box-archive"></i>
         <span className="tooltip-text">Archive</span>
@@ -76,10 +50,9 @@ export default function Navigation() {
 
       {/* Guestbook */}
       <button
-        className={`nav-item tooltip ${
-          currentPath === "/guestbook" ? "active" : ""
-        }`}
-        onClick={() => handleNavClick("/guestbook", 4)}
+        className={`nav-item tooltip ${currentPath === "/guestbook" ? "active" : ""}`}
+        onClick={() => navigate("/guestbook")}
+        aria-label="Guestbook"
       >
         <i className="fa-solid fa-book-open"></i>
         <span className="tooltip-text">Guestbook</span>

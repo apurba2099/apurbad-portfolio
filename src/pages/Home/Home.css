@@ -98,7 +98,7 @@
 }
 
 .name {
-  font-size: 3.6rem;
+  font-size: clamp(2rem, 8vw, 3.6rem);
   font-weight: 800;
   margin-bottom: 10px;
   line-height: 1.08;
@@ -171,6 +171,7 @@
    ============================================================ */
 .about-section {
   margin-bottom: 72px;
+  padding: 0 24px;
 }
 
 .about-text {
@@ -221,6 +222,7 @@
    ============================================================ */
 .tech-section {
   margin-bottom: 72px;
+  padding: 0 24px;
 }
 
 .tech-grid {
@@ -266,6 +268,7 @@
    ============================================================ */
 .projects-section {
   margin-bottom: 72px;
+  padding: 0 24px;
 }
 
 .projects-section-header {
@@ -399,6 +402,7 @@
    ============================================================ */
 .social-section {
   margin-bottom: 72px;
+  padding: 0 24px;
 }
 
 .social-grid {
@@ -466,10 +470,6 @@
     gap: 28px;
   }
 
-  .name {
-    font-size: 2.6rem;
-  }
-
   .profile-image {
     width: 140px;
     height: 140px;
@@ -496,13 +496,50 @@
   }
 }
 
-@media (max-width: 400px) {
-  .name {
-    font-size: 2.2rem;
+/* ── Small phones (≤ 480px / 400px devices) ──────────────── */
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 36px 16px 44px;
+  }
+
+  /* Reduce section side padding so nothing clips on 400px screens */
+  .about-section,
+  .tech-section,
+  .projects-section,
+  .social-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .profile-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .greeting {
+    font-size: 0.9rem;
+  }
+
+  .title {
+    font-size: 0.95rem;
+  }
+
+  .section-heading {
+    font-size: 1.2rem;
+  }
+
+  .tech-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .social-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+    max-width: 100%;
+  }
+
+  .social-card {
+    padding: 20px 12px;
   }
 }
+

@@ -267,3 +267,35 @@
     font-size: 0.88rem;
   }
 }
+
+/* ── Small phones (≤ 480px) ─────────────────────────────── */
+@media (max-width: 480px) {
+  .archive {
+    padding: 32px 14px 120px;
+  }
+
+  .archive-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .gallery-card {
+    height: 160px;
+  }
+
+  .fullscreen-modal {
+    padding: 12px;
+  }
+
+  .image-quote-overlay {
+    padding: 12px 14px;
+  }
+
+  .image-quote-overlay p {
+    font-size: 0.82rem;
+  }
+}

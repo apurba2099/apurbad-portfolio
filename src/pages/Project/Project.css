@@ -230,3 +230,26 @@
     height: 180px;
   }
 }
+
+/* ── Small phones (≤ 480px) ─────────────────────────────── */
+@media (max-width: 480px) {
+  .project {
+    padding: 32px 14px 120px;
+  }
+
+  .project-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .category-title {
+    font-size: 0.95rem;
+  }
+
+  .project-preview {
+    height: 160px;
+  }
+
+  .project-info {
+    padding: 14px 16px;
+  }
+}
