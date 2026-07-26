@@ -5,6 +5,8 @@ import Home from "./pages/Home/Home.jsx";
 import Project from "./pages/Project/Project.jsx";
 import Contact from "./pages/Contact/Contact.jsx";
 import Archive from "./pages/Archive/Archive.jsx";
+import ArchiveGallery from "./pages/Archive/ArchiveGallery.jsx";
+import ArchiveMusic from "./pages/Archive/ArchiveMusic.jsx";
 import Guestbook from "./pages/Guestbook/Guestbook.jsx";
 import ScrollToTop from "./components/Navigation/ScrollToTop.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
@@ -39,6 +41,8 @@ export default function App() {
         <Route path="/project" element={<Project />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/archive" element={<Archive />} />
+        <Route path="/archive/gallery" element={<ArchiveGallery />} />
+        <Route path="/archive/music" element={<ArchiveMusic />} />
         <Route path="/guestbook" element={<Guestbook />} />
       </Routes>
       <Navigation />
