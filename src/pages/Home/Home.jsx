@@ -5,6 +5,8 @@ import coverPhoto from "..//../assets/images/cover-photo.png";
 import project_10 from "..//../assets/images/project-10.png";
 import project_11 from "..//../assets/images/project-11.png";
 import project_3 from "..//../assets/images/project-3.png";
+import Exp_1 from "..//..//assets/images/exp_1_dts.png";
+import Exp_2 from "..//..//assets/images/exp_2_cloud_cad.png";
 import {
   FaHtml5,
   FaCss3Alt,
@@ -194,21 +196,97 @@ export default function Home() {
           for detail. I believe great software is not just functional, it&apos;s
           a pleasure to use.
         </p>
+      </section>
 
-        {/* DTS Experience Badge */}
-        <div className="experience-badge">
-          <span className="badge-dot"></span>
-          <span>
-            Currently interning at{" "}
-            <strong>Dynamic Pro Technology Solutions (DTS)</strong> — my first
-            paid internship 🎉
-          </span>
+      {/* ── Experience Section ────────────────────────────────── */}
+      <section className="experience-section">
+        <h2 className="section-heading">
+          <i class="fa-solid fa-briefcase"></i> Experience
+        </h2>
+
+        <div className="experience-list">
+          {/* ── DTS ─────────────────────────────────────────────── */}
+          <div className="exp-card">
+            {/* Logo placeholder — replace src with real logo later */}
+            <div className="exp-logo-wrap">
+              <div
+                className="exp-logo-placeholder"
+                title="Dynamic Pro Technology Solutions LLP"
+              >
+                <img src={Exp_1} alt="DTS" />
+              </div>
+            </div>
+
+            <div className="exp-body">
+              <div className="exp-header">
+                <div className="exp-title-row">
+                  <span className="exp-company">
+                    Dynamic Pro Technology Solutions LLP
+                  </span>
+                  <span className="exp-live-badge">
+                    <span className="exp-live-dot"></span>
+                    Currently Working
+                  </span>
+                </div>
+                <div className="exp-role-row">
+                  <span className="exp-role">Jr. Software Developer</span>
+                  <span className="exp-mode-tag">Remote</span>
+                </div>
+              </div>
+
+              <span className="exp-date-badge">April 2025 – Present</span>
+
+              <div className="exp-tags">
+                <span className="exp-tag">GHL</span>
+                <span className="exp-tag">Automation</span>
+                <span className="exp-tag">React Js</span>
+              </div>
+            </div>
+          </div>
+
+          {/* ── Cloud Cad AI ─────────────────────────────────────── */}
+          <div className="exp-card">
+            {/* Logo placeholder — replace src with real logo later */}
+            <div className="exp-logo-wrap">
+              <div className="exp-logo-placeholder" title="Cloud Cad AI">
+                <img src={Exp_2} alt="Cloud CAD AI" />
+              </div>
+            </div>
+
+            <div className="exp-body">
+              <div className="exp-header">
+                <div className="exp-title-row">
+                  <span className="exp-company">Cloud Cad AI</span>
+                  <span className="exp-live-badge">
+                    <span className="exp-live-dot"></span>
+                    Currently Working
+                  </span>
+                </div>
+                <div className="exp-role-row">
+                  <span className="exp-role">
+                    Jr. Software Engineering Intern
+                  </span>
+                  <span className="exp-mode-tag">Remote</span>
+                </div>
+              </div>
+
+              <span className="exp-date-badge">June 2026 – Present</span>
+
+              <div className="exp-tags">
+                <span className="exp-tag">WordPress Development</span>
+                <span className="exp-tag">React Js</span>
+                <span className="exp-tag">Supabase</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ── Tech Stack Section ────────────────────────────────── */}
       <section className="tech-section">
-        <h2 className="section-heading">Tech Stack &lt;/&gt;</h2>
+        <h2 className="section-heading">
+          <i class="fa-solid fa-code"></i> Tech Stack
+        </h2>
         <div className="tech-grid">
           {techStack.map((tech, index) => (
             <div key={index} className="tech-item">
@@ -223,7 +301,7 @@ export default function Home() {
       <section id="projects" className="projects-section">
         <div className="projects-section-header">
           <h2 className="section-heading" style={{ marginBottom: 0 }}>
-            Recent Projects ⚙️
+            <i class="fa-solid fa-diagram-project"></i> Recent Projects
           </h2>
           <button
             className="view-all-link"

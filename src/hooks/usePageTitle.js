@@ -8,7 +8,7 @@ const SITE = "apurbadutta.lol";
  */
 export function usePageTitle(pageTitle = null) {
   useEffect(() => {
-    document.title = pageTitle ? `${pageTitle} — ${SITE}` : SITE;
+    document.title = pageTitle ? `${pageTitle}` : SITE;
     return () => {
       document.title = SITE;
     };

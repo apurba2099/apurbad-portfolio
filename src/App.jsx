@@ -6,6 +6,7 @@ import Project from "./pages/Project/Project.jsx";
 import Contact from "./pages/Contact/Contact.jsx";
 import Archive from "./pages/Archive/Archive.jsx";
 import Guestbook from "./pages/Guestbook/Guestbook.jsx";
+import ScrollToTop from "./components/Navigation/ScrollToTop.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 import { useTheme } from "./context/ThemeContext.jsx";
 import "./index.css";
@@ -31,6 +32,7 @@ function ThemeToggle() {
 export default function App() {
   return (
     <ThemeProvider>
+      <ScrollToTop />
       <ThemeToggle />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -165,23 +165,18 @@ const projects = [
     githubLink: "https://github.com/apurba2099/bhai-log",
   },
   {
-  id: 11,
-  title: "Doctor Appointment System",
-  description:
-    "A role-based doctor appointment system with separate interfaces for patients and pharmacy administrators. Patients can search and book doctors based on their location, while pharmacy admins can efficiently manage and schedule patient appointments with doctors in their local network.",
-  backgroundImage: project_11,
-  type: "personal-project",
-  class: "Healthcare Application",
-  color: "#0895d9",
-  techStack: [
-    "MongoDB",
-    "Express.js",
-    "React",
-    "Node.js"
-  ],
-  liveLink: "https://doctor-appointment-apd.vercel.app/",
-  githubLink: "https://github.com/apurba2099/doctor-appointment",
-}
+    id: 11,
+    title: "Doctor Appointment System",
+    description:
+      "A role-based doctor appointment system with separate interfaces for patients and pharmacy administrators. Patients can search and book doctors based on their location, while pharmacy admins can efficiently manage and schedule patient appointments with doctors in their local network.",
+    backgroundImage: project_11,
+    type: "personal-project",
+    class: "Healthcare Application",
+    color: "#0895d9",
+    techStack: ["MongoDB", "Express.js", "React", "Node.js"],
+    liveLink: "https://doctor-appointment-apd.vercel.app/",
+    githubLink: "https://github.com/apurba2099/doctor-appointment",
+  },
 ];
 
 // ─── COMPONENT ───────────────────────────────────────────────────────────────
@@ -274,7 +269,7 @@ export default function Project() {
             <i className="fa-solid fa-arrow-left"></i>
           </button>
           <h2>
-            Projects <i className="fa-solid fa-gears"></i>
+            <i className="fa-solid fa-gears"></i> Projects
           </h2>
         </div>
 

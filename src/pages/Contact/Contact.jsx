@@ -112,7 +112,7 @@ export default function Contact() {
             <i className="fa-solid fa-arrow-left"></i>
           </button>
           <h2>
-            Contact Me <i className="fa-regular fa-message"></i>
+            <i className="fa-regular fa-message"></i> Contact Me
           </h2>
         </div>
 

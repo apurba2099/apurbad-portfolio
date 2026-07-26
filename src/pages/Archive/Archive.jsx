@@ -80,7 +80,7 @@ export default function Archive() {
             <i className="fa-solid fa-arrow-left"></i>
           </button>
           <h2>
-            Archives <i className="fa-solid fa-folder-open"></i>
+            <i className="fa-solid fa-folder-open"></i> Archives
           </h2>
         </div>
 
