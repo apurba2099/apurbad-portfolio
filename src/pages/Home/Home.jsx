@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { usePageTitle } from "../../hooks/usePageTitle";
-import profileImage from "..//../assets/images/profile.jpg";
-import coverPhoto from "..//../assets/images/cover-photo.png";
-import project_10 from "..//../assets/images/project-10.png";
-import project_11 from "..//../assets/images/project-11.png";
-import project_3 from "..//../assets/images/project-3.png";
-import Exp_1 from "..//..//assets/images/exp_1_dts.png";
-import Exp_2 from "..//..//assets/images/exp_2_cloud_cad.png";
+import profileImage from "../../assets/images/profile.jpg";
+import coverPhoto from "../../assets/images/cover-photo.png";
+import project_10 from "../../assets/images/project-10.png";
+import project_11 from "../../assets/images/project-11.png";
+import project_3 from "../../assets/images/project-3.png";
+import project_1 from "../../assets/images/project-1.png";
+import Exp_1 from "../../assets/images/exp_1_dts.png";
+import Exp_2 from "../../assets/images/exp_2_cloud_cad.png";
 import {
   FaHtml5,
   FaCss3Alt,
@@ -29,349 +30,410 @@ import {
   SiPostman,
   SiC,
   SiX,
+  SiDocker,
 } from "react-icons/si";
 import "./Home.css";
 
-// ─── DATA ────────────────────────────────────────────────────────────────────
-
-// GHL logo icon — uses actual GoHighLevel logo, sized to 22×22px
+// ─── GHL LOGO COMPONENT ─────────────────────────────────────────────────────
 const GHLIcon = () => (
   <img
     src="https://i.ibb.co/PvWhbdKN/ghl.jpg"
     alt="GHL"
-    width="22"
-    height="22"
+    width="24"
+    height="24"
     style={{ borderRadius: "4px", objectFit: "contain", display: "block" }}
   />
 );
 
+// ─── TECH STACK DATA ────────────────────────────────────────────────────────
 const techStack = [
-  { name: "HTML", icon: <FaHtml5 color="#E34F26" /> },
-  { name: "CSS", icon: <FaCss3Alt color="#1572B6" /> },
+  { name: "Python", icon: <FaPython color="#3776AB" /> },
   { name: "JavaScript", icon: <FaJs color="#F7DF1E" /> },
   { name: "React.js", icon: <FaReact color="#61DAFB" /> },
-  { name: "Tailwind CSS", icon: <SiTailwindcss color="#38BDF8" /> },
   { name: "Node.js", icon: <FaNodeJs color="#3C873A" /> },
   { name: "Express.js", icon: <SiExpress color="#888" /> },
   { name: "MongoDB", icon: <SiMongodb color="#4DB33D" /> },
-  { name: "Postman", icon: <SiPostman color="#FF6C37" /> },
-  { name: "Python", icon: <FaPython color="#3776AB" /> },
-  { name: "C", icon: <SiC color="#00599C" /> },
-  { name: "SQL Database", icon: <FaDatabase color="#336791" /> },
+  { name: "Docker CLI", icon: <SiDocker color="#2496ED" /> },
+  { name: "GHL Automation", icon: <GHLIcon /> },
+  { name: "GHL Pipeline", icon: <GHLIcon /> },
+  { name: "Tailwind CSS", icon: <SiTailwindcss color="#38BDF8" /> },
+  { name: "HTML5", icon: <FaHtml5 color="#E34F26" /> },
+  { name: "CSS3", icon: <FaCss3Alt color="#1572B6" /> },
+  { name: "SQL", icon: <FaDatabase color="#336791" /> },
   { name: "Git", icon: <FaGitAlt color="#F05033" /> },
   { name: "GitHub", icon: <FaGithub /> },
-  // ── GHL (Go High Level) ──────────────────────
-  { name: "Funnel", icon: <GHLIcon /> },
-  { name: "Pipeline", icon: <GHLIcon /> },
-  { name: "Automation", icon: <GHLIcon /> },
-  { name: "AI Agents", icon: <GHLIcon /> },
 ];
 
-// Only 3 featured / recent projects shown on home
-const recentProjects = [
+// ─── FEATURED PROJECTS (2x2 Grid like aksn.fun) ────────────────────────────
+const featuredProjects = [
   {
     id: 1,
     title: "BhaiLog Chat App",
+    category: "Full Stack App",
     description:
-      "A real-time chat application where users can connect, send messages, and share media instantly from anywhere with a smooth and simple login experience.",
+      "A real-time chat application where users can connect, send messages, and share media with instant synchronization.",
     backgroundImage: project_10,
-    type: "Chat Application",
-    class: "Chat Application",
-    color: "#4f46e5",
     liveLink: "https://bhai-log.vercel.app/",
   },
   {
     id: 12,
     title: "Doctor Appointment System",
+    category: "Healthcare Platform",
     description:
-      "A role-based appointment system where patients can search and book doctors by location, and pharmacy admins can manage and schedule patient appointments efficiently.",
+      "Role-based healthcare appointment booking and patient schedule management system.",
     backgroundImage: project_11,
-    type: "personal-project",
-    class: "Healthcare Application",
-    color: "#0895d9",
     liveLink: "https://doctor-appointment-apd.vercel.app/",
   },
   {
     id: 3,
     title: "MUTE MARKETING",
+    category: "Agency Website",
     description:
-      "A digital marketing agency website designed to showcase services and client success stories and portfolio.",
+      "A high-converting digital marketing agency showcase with client work and lead flows.",
     backgroundImage: project_3,
-    type: "Digital Marketing Agency",
-    class: "Digital Marketing Agency",
-    color: "#f1e504",
     liveLink: "https://mutemarketing.com/",
+  },
+  {
+    id: 2,
+    title: "Pizzape",
+    category: "Web Application",
+    description:
+      "Interactive food ordering application with customizable cart, real-time checkout, and responsive design.",
+    backgroundImage: project_1,
+    liveLink: "https://pizzape.vercel.app/",
   },
 ];
 
-const socialLinks = [
+// ─── CONNECT LINKS ──────────────────────────────────────────────────────────
+const connectLinks = [
   {
-    name: "LinkedIn",
-    icon: <FaLinkedin color="#0A66C2" />,
-    username: "Apurba Dutta",
-    url: "https://www.linkedin.com/in/apurba-dutta-079230240/",
+    name: "Resume",
+    url: "/ApurbaDutta_Resume.pdf",
+    download: "ApurbaDutta_Resume.pdf",
+    isPrimary: true,
   },
   {
-    name: "GitHub",
-    icon: <FaGithub />,
-    username: "apurba2099",
+    name: "Github",
     url: "https://github.com/apurba2099",
   },
   {
-    name: "Twitter / X",
-    icon: <SiX />,
-    username: "apurbadutta2003",
+    name: "Twitter",
     url: "https://x.com/apurbadutta2003",
   },
   {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/apurba-dutta-079230240/",
+  },
+  {
     name: "Instagram",
-    icon: <FaInstagram color="#E1306C" />,
-    username: "apurba2099",
     url: "https://www.instagram.com/apurba2099/",
   },
   {
-    name: "Facebook",
-    icon: <FaFacebook color="#1877F2" />,
-    username: "apurba2099",
-    url: "https://www.facebook.com/apurba2099",
-  },
-  {
-    name: "Discord",
-    icon: <FaDiscord color="#5865F2" />,
-    username: "apurba_2003",
-    url: "https://discordapp.com/users/1144705121385713816",
+    name: "Email",
+    url: "mailto:contact@apurbadutta.lol",
   },
 ];
 
-// ─── COMPONENT ───────────────────────────────────────────────────────────────
-
 export default function Home() {
   const navigate = useNavigate();
-  usePageTitle(null); // title → apurbadutta.lol
+  usePageTitle(null);
 
   return (
-    <div className="home">
-      {/* ── Hero Section ──────────────────────────────────────────── */}
-      <div className="hero-banner">
+    <div className="home-container">
+      {/* ── HERO HEADER (Title + Avatar with original cover background) ── */}
+      <header className="hero-header">
         <img
           src={coverPhoto}
-          alt="Cover"
-          className="hero-banner-img"
+          alt=""
+          className="hero-banner-bg"
           aria-hidden="true"
         />
         <div className="hero-banner-overlay"></div>
-
-        <section id="home" className="hero-section">
-          <div className="hero-content">
-            <div className="hero-text">
-              <p className="greeting">Hey 👋 I am</p>
-              <h1 className="name">Apurba Dutta</h1>
-              <p className="title">&lt;Web Developer /&gt;</p>
-            </div>
-            <div className="profile-image">
-              <img src={profileImage} alt="Apurba Dutta — Web Developer" />
-              <span
-                className="status-indicator"
-                title="Available for work"
-              ></span>
-            </div>
+        <div className="hero-header-content">
+          <div className="hero-intro-text">
+            <h1 className="hero-name font-serif">Apurba Dutta</h1>
+            <p className="subtitle hero-subtitle">
+              Full Stack Developer | Building cool web apps :)
+            </p>
           </div>
-        </section>
-      </div>
+          <div className="hero-avatar-wrap">
+            <img
+              src={profileImage}
+              alt="Apurba Dutta"
+              className="hero-avatar"
+              width="104"
+              height="104"
+              loading="eager"
+              decoding="async"
+            />
+            <span
+              className="hero-online-indicator"
+              title="Available for work"
+              aria-label="Online status: Available for work"
+            ></span>
+          </div>
+        </div>
+      </header>
 
-      {/* ── Who am I Section ──────────────────────────────────── */}
-      <section className="about-section">
-        <h2 className="section-heading">Who am I ?</h2>
-        <p className="about-text">
-          I&apos;m <strong>Apurba Dutta</strong> — a passionate full-stack web
-          developer from West Bengal, India. I love crafting beautiful,
-          performant web applications that solve real problems. With hands-on
-          experience in
-          <strong> React, Node.js, Express</strong>, and{" "}
-          <strong>MongoDB</strong>, I build complete products from design to
-          deployment. <br />
-          <br />
-          Whether it&apos;s a client landing page, a data-driven dashboard, or
-          an e-commerce flow — I bring ideas to life with clean code and an eye
-          for detail. I believe great software is not just functional, it&apos;s
-          a pleasure to use.
+      {/* ── ABOUT SECTION ── */}
+      <section className="page-section">
+        <h2 className="section-heading">About</h2>
+        <p className="about-lead">
+          A passionate full-stack developer who lives in code and terminal crafting modern, performant web applications.
+        </p>
+        <p className="about-secondary subtitle">
+          I build full-stack web platforms, design intuitive interfaces, and automate business workflows. With hands-on experience in{" "}
+          <span className="font-semibold text-highlight">React, Node.js, Express</span>, and{" "}
+          <span className="font-semibold text-highlight">MongoDB</span>, I create products that are reliable, responsive, and a pleasure to use.
         </p>
       </section>
 
-      {/* ── Experience Section ────────────────────────────────── */}
-      <section className="experience-section">
-        <h2 className="section-heading">
-          <i class="fa-solid fa-briefcase"></i> Experience
-        </h2>
-
-        <div className="experience-list">
-          {/* ── DTS ─────────────────────────────────────────────── */}
-          <div className="exp-card">
-            {/* Logo placeholder — replace src with real logo later */}
-            <div className="exp-logo-wrap">
-              <div
-                className="exp-logo-placeholder"
-                title="Dynamic Pro Technology Solutions LLP"
-              >
-                <img src={Exp_1} alt="DTS" />
-              </div>
-            </div>
-
-            <div className="exp-body">
-              <div className="exp-header">
-                <div className="exp-title-row">
-                  <span className="exp-company">
-                    Dynamic Pro Technology Solutions LLP
-                  </span>
-                  <span className="exp-live-badge">
-                    <span className="exp-live-dot"></span>
-                    Currently Working
-                  </span>
-                </div>
-                <div className="exp-role-row">
-                  <span className="exp-role">Jr. Software Developer</span>
-                  <span className="exp-mode-tag">Remote</span>
-                </div>
-              </div>
-
-              <span className="exp-date-badge">April 2025 – Present</span>
-
-              <div className="exp-tags">
-                <span className="exp-tag">GHL</span>
-                <span className="exp-tag">Automation</span>
-                <span className="exp-tag">React Js</span>
-              </div>
-            </div>
-          </div>
-
-          {/* ── Cloud Cad AI ─────────────────────────────────────── */}
-          <div className="exp-card">
-            {/* Logo placeholder — replace src with real logo later */}
-            <div className="exp-logo-wrap">
-              <div className="exp-logo-placeholder" title="Cloud Cad AI">
-                <img src={Exp_2} alt="Cloud CAD AI" />
-              </div>
-            </div>
-
-            <div className="exp-body">
-              <div className="exp-header">
-                <div className="exp-title-row">
-                  <span className="exp-company">Cloud Cad AI</span>
-                  <span className="exp-live-badge">
-                    <span className="exp-live-dot"></span>
-                    Currently Working
-                  </span>
-                </div>
-                <div className="exp-role-row">
-                  <span className="exp-role">
-                    Jr. Software Engineering Intern
-                  </span>
-                  <span className="exp-mode-tag">Remote</span>
-                </div>
-              </div>
-
-              <span className="exp-date-badge">June 2026 – Present</span>
-
-              <div className="exp-tags">
-                <span className="exp-tag">WordPress Development</span>
-                <span className="exp-tag">React Js</span>
-                <span className="exp-tag">Supabase</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Tech Stack Section ────────────────────────────────── */}
-      <section className="tech-section">
-        <h2 className="section-heading">
-          <i class="fa-solid fa-code"></i> Tech Stack
-        </h2>
-        <div className="tech-grid">
-          {techStack.map((tech, index) => (
-            <div key={index} className="tech-item">
-              <span className="tech-icon">{tech.icon}</span>
-              <span className="tech-name">{tech.name}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Recent Projects Section ───────────────────────────── */}
-      <section id="projects" className="projects-section">
-        <div className="projects-section-header">
-          <h2 className="section-heading" style={{ marginBottom: 0 }}>
-            <i class="fa-solid fa-diagram-project"></i> Recent Projects
-          </h2>
-          <button
-            className="view-all-link"
-            onClick={() => navigate("/project")}
-          >
-            View all →
-          </button>
-        </div>
-
-        <div className="projects-grid">
-          {recentProjects.map((project) => (
-            <div key={project.id} className="project-card">
-              <div className="project-preview">
-                <div className="project-overlay"></div>
-                <img src={project.backgroundImage} alt={project.title} />
-              </div>
-              <div className="project-info">
-                <div className="project-links">
-                  <p className="project-name">{project.title}</p>
-                  <a
-                    href={project.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-external-link"
-                    title={`Visit ${project.title}`}
-                    aria-label={`Open ${project.title} live demo`}
-                  >
-                    <i className="fa fa-external-link"></i>
-                  </a>
-                </div>
-                <span
-                  className="project-type"
-                  style={{
-                    color: project.color,
-                    border: `1.5px solid ${project.color}`,
-                  }}
-                >
-                  {project.class}
-                </span>
-                <p className="project-description">{project.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Find Me Here Section ──────────────────────────────── */}
-      <section className="social-section">
-        <h2 className="section-heading">
-          Find Me Here{" "}
-          <i
-            className="fa-solid fa-magnifying-glass"
-            style={{ fontSize: "1.1rem" }}
-          ></i>
-        </h2>
-        <div className="social-grid">
-          {socialLinks.map((social, index) => (
+      {/* ── CONNECT SECTION ── */}
+      <section className="page-section">
+        <h2 className="section-heading">Connect</h2>
+        <div className="connect-pills">
+          {connectLinks.map((item) => (
             <a
-              key={index}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-card"
-              aria-label={`Visit ${social.name}`}
+              key={item.name}
+              href={item.url}
+              download={item.download || undefined}
+              target={item.download ? undefined : "_blank"}
+              rel={item.download ? undefined : "noopener noreferrer"}
+              className={item.isPrimary ? "pill-btn pill-btn-primary" : "pill-btn pill-btn-secondary"}
             >
-              <div className="social-icon">{social.icon}</div>
-              <p className="social-username">{social.username}</p>
+              <span>{item.name}</span>
+              {item.download ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="pill-icon"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="pill-icon"
+                >
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path>
+                </svg>
+              )}
             </a>
           ))}
         </div>
+      </section>
+
+      {/* ── WORK EXPERIENCE ── */}
+      <section className="page-section">
+        <h2 className="section-heading">Experience</h2>
+        <div className="experience-list">
+          {/* DTS */}
+          <div className="exp-card card-hover">
+            <div className="exp-logo-wrap">
+              <img src={Exp_1} alt="Dynamic Pro Technology Solutions" className="exp-logo" width="36" height="36" loading="lazy" />
+            </div>
+            <div className="exp-body">
+              <div className="exp-top-row">
+                <span className="exp-company">Dynamic Pro Technology Solutions</span>
+                <span className="exp-status-badge">
+                  <span className="exp-pulse-dot"></span>
+                  Present
+                </span>
+              </div>
+              <div className="exp-role-row">
+                <span className="exp-role">Jr. Software Developer</span>
+                <span className="exp-timeline">Apr 2025 – Present</span>
+              </div>
+              <p className="exp-desc subtitle">
+                Building custom automation funnels, AI integrations, and responsive React frontend applications.
+              </p>
+              <div className="exp-tag-group">
+                <span className="tag-badge">React Js</span>
+                <span className="tag-badge">Automation</span>
+                <span className="tag-badge">GHL</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Cloud Cad AI */}
+          <div className="exp-card card-hover">
+            <div className="exp-logo-wrap">
+              <img src={Exp_2} alt="Cloud Cad AI" className="exp-logo" width="36" height="36" loading="lazy" />
+            </div>
+            <div className="exp-body">
+              <div className="exp-top-row">
+                <span className="exp-company">Cloud Cad AI</span>
+                <span className="exp-status-badge">
+                  <span className="exp-pulse-dot"></span>
+                  Present
+                </span>
+              </div>
+              <div className="exp-role-row">
+                <span className="exp-role">Jr. Software Engineering Intern</span>
+                <span className="exp-timeline">Jun 2026 – Present</span>
+              </div>
+              <p className="exp-desc subtitle">
+                Working on modern web architectures, Supabase backend integrations, and UI components.
+              </p>
+              <div className="exp-tag-group">
+                <span className="tag-badge">React Js</span>
+                <span className="tag-badge">Supabase</span>
+                <span className="tag-badge">WordPress</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TECH STACK ── */}
+      <section className="page-section">
+        <h2 className="section-heading">Tech Stack</h2>
+        <div className="tech-stack-grid">
+          {techStack.map((tech) => (
+            <div key={tech.name} className="tech-card card-hover">
+              <div className="tech-icon-wrap">{tech.icon}</div>
+              <span className="tech-label">{tech.name}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── FEATURED PROJECTS (aksn.fun style cards) ── */}
+      <section className="page-section">
+        <h2 className="section-heading">Projects</h2>
+        <div className="projects-grid">
+          {featuredProjects.map((project) => (
+            <a
+              key={project.id}
+              href={project.liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ref-project-card card-hover"
+            >
+              <div className="ref-project-thumb">
+                <img
+                  src={project.backgroundImage}
+                  alt={project.title}
+                  className="ref-thumb-img"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div className="ref-project-header">
+                <span className="ref-project-title">{project.title}</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="ref-project-arrow"
+                >
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path>
+                </svg>
+              </div>
+              <p className="ref-project-cat">{project.category}</p>
+              <p className="ref-project-desc">{project.description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* ── FINDING SOMETHING ELSE? (Footer link) ── */}
+      <section className="page-section" style={{ marginTop: "3.5rem" }}>
+        <h2 className="section-heading no-dot">Finding Something Else?</h2>
+        <p className="finding-links">
+          Check out my{" "}
+          <button
+            type="button"
+            className="link-accent link-btn"
+            onClick={() => navigate("/project")}
+          >
+            <span>Projects</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M7 7h10v10"></path>
+              <path d="M7 17 17 7"></path>
+            </svg>
+          </button>
+          , browse the{" "}
+          <button
+            type="button"
+            className="link-accent link-btn"
+            onClick={() => navigate("/archive")}
+          >
+            <span>Archive</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M7 7h10v10"></path>
+              <path d="M7 17 17 7"></path>
+            </svg>
+          </button>
+          , or leave a note on the{" "}
+          <button
+            type="button"
+            className="link-accent link-btn"
+            onClick={() => navigate("/guestbook")}
+          >
+            <span>Guestbook</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M7 7h10v10"></path>
+              <path d="M7 17 17 7"></path>
+            </svg>
+          </button>
+          .
+        </p>
       </section>
     </div>
   );

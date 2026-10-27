@@ -16,11 +16,8 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { auth, googleProvider, db } from "../../firebase.js";
-// import guestbookBanner from "./image/guest-book.png";
 import guestbookBanner from "./image/guestBook.png";
 import "./Guestbook.css";
-
-// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function formatDate(timestamp) {
   if (!timestamp) return "";
@@ -32,23 +29,16 @@ function formatDate(timestamp) {
   });
 }
 
-const AUTH_ERROR_MAP = {
-  "auth/popup-blocked":
-    "Popup was blocked. Please allow popups for this site.",
-  "auth/unauthorized-domain":
-    "Domain not authorized. Add it in Firebase Console → Auth → Authorized Domains.",
-};
-
-// ─── Sub-components ───────────────────────────────────────────────────────────
-
 function Avatar({ photoURL, name, size = "lg" }) {
   if (photoURL) {
     return (
       <img
         src={photoURL}
-        alt={name}
+        alt={name || ""}
         className={`gb-avatar gb-avatar--${size}`}
         referrerPolicy="no-referrer"
+        loading="lazy"
+        decoding="async"
       />
     );
   }
@@ -61,83 +51,79 @@ function Avatar({ photoURL, name, size = "lg" }) {
 
 function MessageCard({ msg, isOwn }) {
   return (
-    <article className={`gb-message-card${isOwn ? " gb-message-card--mine" : ""}`}>
-      <div className="gb-message-header">
+    <article className={`ref-msg-card ${isOwn ? "ref-msg-card--mine" : ""}`}>
+      <div className="ref-msg-avatar-col">
         <Avatar photoURL={msg.photoURL} name={msg.name} size="lg" />
-        <div className="gb-message-meta">
-          <span className="gb-message-name">
-            {msg.name}
-            {isOwn && <span className="gb-you-badge">you</span>}
-          </span>
-          <span className="gb-message-date">{formatDate(msg.createdAt)}</span>
-        </div>
       </div>
-      <p className="gb-message-text">{msg.message}</p>
+      <div className="ref-msg-content-col">
+        <div className="ref-msg-meta-row">
+          <span className="ref-msg-author">{msg.name}</span>
+          {isOwn && <span className="ref-you-tag">you</span>}
+          <time className="ref-msg-time">{formatDate(msg.createdAt)}</time>
+        </div>
+        <p className="ref-msg-body">{msg.message}</p>
+      </div>
     </article>
   );
 }
 
-// ─── Main Component ───────────────────────────────────────────────────────────
-
 export default function Guestbook() {
   const navigate = useNavigate();
-  usePageTitle("Guestbook"); // title → Guestbook — apurbadutta.lol
+  usePageTitle("Guestbook");
 
-  // Auth
   const [user, setUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
   const [signInError, setSignInError] = useState("");
 
-  // Compose
   const [message, setMessage] = useState("");
   const [postError, setPostError] = useState("");
   const textareaRef = useRef(null);
 
-  // Messages feed
   const [messages, setMessages] = useState([]);
   const [msgsLoading, setMsgsLoading] = useState(true);
   const [msgsError, setMsgsError] = useState("");
 
-  // ── Auth listener
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (firebaseUser) => {
-      setUser(firebaseUser);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
       setAuthLoading(false);
     });
-    return unsub;
+    return () => unsubscribe();
   }, []);
 
-  // ── Firestore real-time listener
   useEffect(() => {
-    const q = query(collection(db, "guestbook"), orderBy("createdAt", "desc"));
-    const unsub = onSnapshot(
+    const q = query(
+      collection(db, "guestbook"),
+      orderBy("createdAt", "desc")
+    );
+
+    const unsubscribe = onSnapshot(
       q,
       (snapshot) => {
-        setMessages(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+        const docs = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setMessages(docs);
         setMsgsLoading(false);
         setMsgsError("");
       },
-      (err) => {
-        console.error("Firestore error:", err);
+      (error) => {
+        console.error("Firestore listener error:", error);
+        setMsgsError("Failed to load messages.");
         setMsgsLoading(false);
-        setMsgsError("Could not load messages. Please try again later.");
       }
     );
-    return unsub;
+
+    return () => unsubscribe();
   }, []);
 
-  // ── Handlers
-  const handleSignIn = async () => {
+  const handleGoogleSignIn = async () => {
     setSignInError("");
     try {
       await signInWithPopup(auth, googleProvider);
     } catch (err) {
-      console.error("Sign-in error:", err.code, err.message);
-      if (err.code !== "auth/popup-closed-by-user") {
-        setSignInError(
-          AUTH_ERROR_MAP[err.code] ?? `Sign-in failed: ${err.message}`
-        );
-      }
+      setSignInError("Failed to sign in. Please try again.");
     }
   };
 
@@ -149,7 +135,7 @@ export default function Guestbook() {
     }
   };
 
-  const handlePost = () => {
+  const handlePost = async () => {
     const trimmed = message.trim();
     if (!trimmed || !user) return;
     if (trimmed.length > 280) {
@@ -157,26 +143,21 @@ export default function Guestbook() {
       return;
     }
 
-    // Clear immediately — button disables via !message.trim() so no double-post.
-    // addDoc writes to local IndexedDB cache first → onSnapshot fires instantly.
-    // No await needed: spinner is gone, UX is instant.
     setMessage("");
     setPostError("");
 
-    addDoc(collection(db, "guestbook"), {
-      uid: user.uid,
-      name: user.displayName || "Anonymous",
-      photoURL: user.photoURL || "",
-      message: trimmed,
-      createdAt: serverTimestamp(),
-    }).catch((err) => {
-      // Restore text so the user doesn't lose their message
+    try {
+      await addDoc(collection(db, "guestbook"), {
+        uid: user.uid,
+        name: user.displayName || "Anonymous",
+        photoURL: user.photoURL || null,
+        message: trimmed,
+        createdAt: serverTimestamp(),
+      });
+    } catch (err) {
       setMessage(trimmed);
-      setPostError("Failed to post. Please try again.");
-      console.error("Post error:", err);
-    });
-
-    textareaRef.current?.focus();
+      setPostError("Failed to post message. Please try again.");
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -186,55 +167,66 @@ export default function Guestbook() {
   const charCount = message.length;
   const overLimit = charCount > 280;
 
-  // ── Render
   return (
-    <div className="guestbook">
-      {/* Back */}
-      <button
-        className="gb-back-btn"
-        onClick={() => navigate("/")}
-        aria-label="Go back home"
-      >
-        <i className="fa-solid fa-arrow-left"></i>
-      </button>
-
-      {/* Hero */}
-      <section className="gb-hero" aria-label="Guestbook header">
-        <img
-          src={guestbookBanner}
-          alt="Guestbook banner"
-          className="gb-hero-img"
-          aria-hidden="true"
-        />
-        <div className="gb-hero-overlay"></div>
-        <div className="gb-hero-content">
-          <h1 className="gb-title">
-            Guestbook<span className="gb-dot">.</span>
-          </h1>
-          <p className="gb-subtitle">Write something. Future me will smile.</p>
+    <main className="guestbook-page-wrap">
+      <div className="guestbook-container">
+        {/* Top Header Row with Back Button */}
+        <div className="gb-header-section">
+          <div className="gb-title-row">
+            <button
+              type="button"
+              className="back-icon-btn gb-back-btn"
+              onClick={() => navigate("/")}
+              aria-label="Go back"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m12 19-7-7 7-7"></path>
+                <path d="M19 12H5"></path>
+              </svg>
+            </button>
+            <h1 className="gb-main-heading font-serif">
+              Guestbook<span style={{ color: "var(--accent)" }}>.</span>
+            </h1>
+          </div>
+          <p className="subtitle">Write something. Future me will smile.</p>
         </div>
-      </section>
 
-      {/* Content */}
-      <div className="gb-container">
+        {/* Banner with clean aspect ratio */}
+        <div className="gb-banner-wrap">
+          <img
+            src={guestbookBanner}
+            alt="Guestbook"
+            className="gb-banner-img"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
 
         {/* Compose / Sign-in */}
-        <section className="gb-compose-section" aria-label="Leave a message">
+        <section className="gb-action-box">
           {authLoading ? (
-            <div className="gb-auth-loading" aria-label="Loading…">
-              <span className="gb-spinner"></span>
-            </div>
+            <div className="gb-skeleton-loader"></div>
           ) : user ? (
-            <div className="gb-composer">
-              <div className="gb-composer-header">
+            <div className="gb-composer-box">
+              <div className="gb-composer-top">
                 <div className="gb-user-info">
                   <Avatar photoURL={user.photoURL} name={user.displayName} size="sm" />
                   <span className="gb-user-name">{user.displayName}</span>
                 </div>
                 <button
+                  type="button"
                   className="gb-signout-btn"
                   onClick={handleSignOut}
-                  aria-label="Sign out"
                 >
                   Sign out
                 </button>
@@ -242,96 +234,100 @@ export default function Guestbook() {
 
               <textarea
                 ref={textareaRef}
-                id="guestbook-message"
-                className={`gb-textarea${overLimit ? " gb-textarea--error" : ""}`}
+                className={`ref-textarea gb-textarea ${overLimit ? "error-border" : ""}`}
                 placeholder="Leave a message… (Ctrl+Enter to post)"
                 value={message}
-                onChange={(e) => { setMessage(e.target.value); setPostError(""); }}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                  setPostError("");
+                }}
                 onKeyDown={handleKeyDown}
-                rows={4}
-                aria-label="Your message"
-              />
+                rows="3"
+              ></textarea>
 
-              <div className="gb-composer-footer">
-                <span className={`gb-char-count${overLimit ? " gb-char-count--over" : ""}`}>
-                  {charCount} / 280
+              <div className="gb-composer-bottom">
+                <span className={`gb-char-counter ${overLimit ? "text-danger" : ""}`}>
+                  {charCount}/280
                 </span>
                 <button
-                  id="guestbook-post-btn"
-                  className="gb-post-btn"
+                  type="button"
+                  className="ref-submit-btn"
                   onClick={handlePost}
                   disabled={!message.trim() || overLimit}
                 >
-                  <i className="fa-solid fa-paper-plane"></i>Post
+                  Post Message
                 </button>
               </div>
 
-              {postError && (
-                <p className="gb-error" role="alert">{postError}</p>
-              )}
+              {postError && <p className="gb-error-hint">{postError}</p>}
             </div>
           ) : (
-            <div className="gb-signin-cta">
-              <p className="gb-signin-label">To leave a message</p>
+            <div className="gb-signin-prompt">
               <button
-                id="guestbook-signin-btn"
-                className="gb-google-btn"
-                onClick={handleSignIn}
-                aria-label="Continue with Google"
+                type="button"
+                className="gb-google-signin-btn"
+                onClick={handleGoogleSignIn}
+                aria-label="Sign in to Leave a Message"
               >
-                <FaGoogle className="gb-google-icon" aria-hidden="true" />
-                Continue with Google
+                <span className="gb-google-icon-wrapper">
+                  <svg
+                    className="gb-google-svg"
+                    viewBox="0 0 24 24"
+                    width="18"
+                    height="18"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                      fill="#4285F4"
+                    />
+                    <path
+                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                      fill="#34A853"
+                    />
+                    <path
+                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                      fill="#FBBC05"
+                    />
+                    <path
+                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                      fill="#EA4335"
+                    />
+                  </svg>
+                </span>
+                <span className="gb-google-text">Sign in to Leave a Message</span>
               </button>
-              {signInError && (
-                <p className="gb-error gb-signin-error" role="alert">
-                  {signInError}
-                </p>
-              )}
+              {signInError && <p className="gb-error-hint">{signInError}</p>}
             </div>
           )}
         </section>
 
-        {/* Divider */}
-        <div className="gb-divider" aria-hidden="true"></div>
-
-        {/* Messages feed */}
-        <section className="gb-messages-section" aria-label="Recent messages">
-          <h2 className="gb-messages-heading">
-            Recent Messages
-            {messages.length > 0 && (
-              <span className="gb-messages-count">{messages.length}</span>
-            )}
-          </h2>
+        {/* Recent Messages Section */}
+        <section className="gb-messages-section">
+          <h2 className="section-heading !mb-6">Recent Messages</h2>
 
           {msgsLoading ? (
-            <div className="gb-msgs-loading">
-              <span className="gb-spinner"></span>
-              <span>Loading messages…</span>
+            <div className="gb-messages-list">
+              <div className="gb-msg-skeleton"></div>
+              <div className="gb-msg-skeleton"></div>
             </div>
           ) : msgsError ? (
-            <div className="gb-empty">
-              <span className="gb-empty-icon">⚠️</span>
-              <p>{msgsError}</p>
-            </div>
+            <p className="subtitle text-danger">{msgsError}</p>
           ) : messages.length === 0 ? (
-            <div className="gb-empty">
-              <span className="gb-empty-icon">✍️</span>
-              <p>No messages yet. Be the first to sign the guestbook!</p>
-            </div>
+            <p className="subtitle">No messages yet. Be the first to leave one!</p>
           ) : (
             <div className="gb-messages-list">
               {messages.map((msg) => (
                 <MessageCard
                   key={msg.id}
                   msg={msg}
-                  isOwn={user?.uid === msg.uid}
+                  isOwn={user && msg.uid === user.uid}
                 />
               ))}
             </div>
           )}
         </section>
-
       </div>
-    </div>
+    </main>
   );
 }

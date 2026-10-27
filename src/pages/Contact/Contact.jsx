@@ -1,247 +1,261 @@
 import { useState } from "react";
 import { usePageTitle } from "../../hooks/usePageTitle";
 import { useNavigate } from "react-router-dom";
-import {
-  FaLinkedin,
-  FaInstagram,
-  FaFacebook,
-  FaGithub,
-  FaDiscord,
-} from "react-icons/fa";
-import { SiX } from "react-icons/si";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Contact.css";
 
-// ─── DATA ────────────────────────────────────────────────────────────────────
-
-const socialLinks = [
+const connectLinks = [
   {
-    name: "LinkedIn",
-    icon: <FaLinkedin color="#0A66C2" />,
-    username: "Apurba Dutta",
-    url: "https://www.linkedin.com/in/apurba-dutta-079230240/",
+    name: "Resume",
+    url: "/ApurbaDutta_Resume.pdf",
+    download: "ApurbaDutta_Resume.pdf",
+    isPrimary: true,
   },
   {
-    name: "GitHub",
-    icon: <FaGithub />,
-    username: "apurba2099",
+    name: "Github",
     url: "https://github.com/apurba2099",
   },
   {
-    name: "Twitter / X",
-    icon: <SiX />,
-    username: "apurbadutta2003",
+    name: "Twitter",
     url: "https://x.com/apurbadutta2003",
   },
   {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/apurba-dutta-079230240/",
+  },
+  {
     name: "Instagram",
-    icon: <FaInstagram color="#E1306C" />,
-    username: "apurba2099",
     url: "https://www.instagram.com/apurba2099/",
   },
   {
-    name: "Facebook",
-    icon: <FaFacebook color="#1877F2" />,
-    username: "apurba2099",
-    url: "https://www.facebook.com/apurba2099",
-  },
-  {
-    name: "Discord",
-    icon: <FaDiscord color="#5865F2" />,
-    username: "apurba_2003",
-    url: "https://discordapp.com/users/1144705121385713816",
+    name: "Email",
+    url: "mailto:contact@apurbadutta.lol",
   },
 ];
 
-// ─── COMPONENT ───────────────────────────────────────────────────────────────
-
-const WEB3_ACCESS_KEY = "d16f0bec-44b1-4c37-8c33-4d264b2b50a2";
-
 export default function Contact() {
   const navigate = useNavigate();
-  usePageTitle("Contact"); // title → Contact — apurbadutta.lol
+  usePageTitle("Contact");
 
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
 
-  const handleInputChange = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const nameTrimmed = formData.name.trim();
+    const emailTrimmed = formData.email.trim();
+    const messageTrimmed = formData.message.trim();
+
+    if (!nameTrimmed || !emailTrimmed || !messageTrimmed) {
+      toast.error("Please fill in all fields before sending.");
+      return;
+    }
+
+    if (isSubmitting) return; // Prevent duplicate submission
     setIsSubmitting(true);
+
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ access_key: WEB3_ACCESS_KEY, ...formData }),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: nameTrimmed,
+          email: emailTrimmed,
+          message: messageTrimmed,
+        }),
       });
-      const result = await res.json();
-      if (result.success) {
-        setShowSuccess(true);
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        toast.success(result.message || "Message sent successfully! ✨");
         setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setShowSuccess(false), 5000);
       } else {
-        toast.error("Failed to send message. Please try again.");
+        const errorMsg =
+          result.message || "Failed to send message. Please try again.";
+        toast.error(errorMsg);
       }
-    } catch (err) {
-      toast.error(`An error occurred: ${err.message}`);
+    } catch {
+      toast.error("Network error. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="contact">
-      {/* Contact Section */}
-      <section id="contact" className="contact-section">
-        <div className="contact-header">
-          <button
-            className="back-btn"
-            onClick={() => navigate("/")}
-            aria-label="Go back home"
+    <div className="contact-page-container">
+      <ToastContainer
+        position="bottom-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+
+      {/* Top Header with Back Button */}
+      <div className="page-header-row">
+        <button
+          type="button"
+          className="back-icon-btn"
+          onClick={() => navigate("/")}
+          aria-label="Go back"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <i className="fa-solid fa-arrow-left"></i>
-          </button>
-          <h2>
-            <i className="fa-regular fa-message"></i> Contact Me
-          </h2>
+            <path d="m12 19-7-7 7-7"></path>
+            <path d="M19 12H5"></path>
+          </svg>
+        </button>
+        <h1 className="section-heading !mb-0">Contact</h1>
+      </div>
+
+      {/* Contact Form */}
+      <form onSubmit={handleSubmit} className="ref-contact-form">
+        <div className="form-col">
+          <label htmlFor="contact-name" className="form-label">
+            Name
+          </label>
+          <input
+            id="contact-name"
+            name="name"
+            type="text"
+            className="ref-input"
+            placeholder="Your name"
+            autoComplete="name"
+            required
+            value={formData.name}
+            onChange={handleChange}
+            disabled={isSubmitting}
+          />
         </div>
 
-        {/* Success Banner */}
-        {showSuccess && (
-          <div className="success-message" role="alert">
-            <div className="success-icon">✓</div>
-            <div className="success-text">
-              <h3>Message sent successfully!</h3>
-              <p>Thank you for reaching out. I&apos;ll get back to you soon.</p>
-            </div>
-          </div>
-        )}
+        <div className="form-col">
+          <label htmlFor="contact-email" className="form-label">
+            Email
+          </label>
+          <input
+            id="contact-email"
+            name="email"
+            type="email"
+            className="ref-input"
+            placeholder="you@email.com"
+            autoComplete="email"
+            required
+            value={formData.email}
+            onChange={handleChange}
+            disabled={isSubmitting}
+          />
+        </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="contact-form" noValidate>
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Your name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="your@email.com"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-          </div>
+        <div className="form-col-full">
+          <label htmlFor="contact-message" className="form-label">
+            Message
+          </label>
+          <textarea
+            id="contact-message"
+            name="message"
+            rows="4"
+            className="ref-textarea"
+            placeholder="Your message..."
+            required
+            value={formData.message}
+            onChange={handleChange}
+            disabled={isSubmitting}
+          ></textarea>
+        </div>
 
-          <div className="form-group">
-            <label htmlFor="message">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              placeholder="Write your message here..."
-              rows="6"
-              value={formData.message}
-              onChange={handleInputChange}
-              required
-            ></textarea>
-          </div>
+        <div className="form-actions">
+          <button
+            type="submit"
+            className="ref-submit-btn"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Sending..." : "Send Message"}
+          </button>
+        </div>
+      </form>
 
-          <div className="form-actions">
-            <button
-              type="submit"
-              className="submit-button"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Sending…" : "Send Message"}
-            </button>
-          </div>
-        </form>
-      </section>
-
-      {/* Social Links */}
-      <section className="social-section">
-        <h2>
-          Find me on social media <i className="fa-solid fa-message"></i>
-        </h2>
-        <div className="social-grid">
-          {socialLinks.map((social, index) => (
+      {/* Connect Section */}
+      <section className="page-section" style={{ marginTop: "2rem" }}>
+        <h2 className="section-heading">Connect</h2>
+        <div className="connect-pills">
+          {connectLinks.map((item) => (
             <a
-              key={index}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-card"
-              aria-label={`Visit ${social.name}`}
+              key={item.name}
+              href={item.url}
+              download={item.download || undefined}
+              target={item.download ? undefined : "_blank"}
+              rel={item.download ? undefined : "noopener noreferrer"}
+              className={item.isPrimary ? "pill-btn pill-btn-primary" : "pill-btn pill-btn-secondary"}
             >
-              <div className="social-icon">{social.icon}</div>
-              <p className="social-username">{social.username}</p>
+              <span>{item.name}</span>
+              {item.download ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="pill-icon"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="pill-icon"
+                >
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path>
+                </svg>
+              )}
             </a>
           ))}
         </div>
       </section>
-
-      {/* Mail Box */}
-      <section className="envelop">
-        <div className="mail-box">
-          <a href="mailto:apurbadutta2099@gmail.com">
-            <i className="fa fa-envelope"></i> apurbadutta2099@gmail.com
-          </a>
-          <h2>&lt;Apurba Dutta/&gt;</h2>
-          <a
-            href="https://apurbadutta.lol"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            🔗 apurbadutta.lol
-          </a>
-        </div>
-      </section>
-
-      {/* Resume Download */}
-      <section className="resume-section">
-        <a
-          className="resume-btn"
-          href="./ApurbaDutta_Resume.pdf"
-          download="ApurbaDutta_Resume.pdf"
-        >
-          <i className="fa-solid fa-download"></i>
-          Download My CV
-        </a>
-      </section>
-
-      {/* Toast notifications */}
-      <ToastContainer
-        position="bottom-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        pauseOnHover
-        theme="dark"
-      />
     </div>
   );
 }

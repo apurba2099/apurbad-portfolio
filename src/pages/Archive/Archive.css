@@ -1,375 +1,206 @@
 /* ============================================================
-   ARCHIVE PAGE — AMOLED/Light theme aware
+   ARCHIVE PAGES & GALLERY & MUSIC (aksn.fun layout: 672px max-w-2xl)
    ============================================================ */
-.archive {
-  max-width: 1100px;
+.archive-page-container {
+  max-width: 42rem; /* 672px (max-w-2xl) */
   margin: 0 auto;
-  padding: 56px 24px 120px;
-  min-height: 100vh;
+  padding: 3rem 1rem 7.5rem 1rem;
 }
 
-/* ── Header ──────────────────────────────────────────────── */
-.archive-header {
+@media (min-width: 640px) {
+  .archive-page-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* ── FOLDERS ─────────────────────────────────────────────── */
+.archive-folders-wrap {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 36px;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
 }
 
-.archive-header h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin: 0;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
+.ref-folder-card {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-}
-
-.back-btn {
-  width: 40px;
-  height: 40px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  color: var(--text-primary);
-  cursor: pointer;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-}
-
-.back-btn:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--border-hover);
-  transform: translateX(-2px);
-}
-
-/* ── Gallery Grid ────────────────────────────────────────── */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 18px;
-}
-
-/* ── Gallery Card ────────────────────────────────────────── */
-.gallery-card {
-  position: relative;
-  width: 100%;
-  height: 280px;
-  border-radius: 14px;
-  overflow: hidden;
-  cursor: pointer;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
   background-color: var(--bg-card);
-  border: 1px solid var(--border);
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-  will-change: transform;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  outline: none;
+  min-width: 120px;
 }
 
-.gallery-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow-card);
+.ref-folder-icon-wrap {
+  display: block;
+  width: 4rem;
+  height: 3rem;
+  margin-bottom: 0.75rem;
 }
 
-.gallery-card img {
+.ref-folder-svg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.45s ease;
+  transition: transform 0.2s ease;
 }
 
-.gallery-card:hover img {
+.ref-folder-card:hover .ref-folder-svg {
   transform: scale(1.08);
 }
 
-/* ── Hover Overlay ───────────────────────────────────────── */
-.gallery-overlay {
+.ref-folder-name {
+  font-size: 0.875rem;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  transition: color 0.15s ease;
+}
+
+.ref-folder-card:hover .ref-folder-name {
+  color: var(--accent);
+}
+
+/* ── GALLERY ─────────────────────────────────────────────── */
+.gallery-masonry-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 540px) {
+  .gallery-masonry-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.ref-gallery-item {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  aspect-ratio: 4 / 3;
+}
+
+.ref-gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.ref-gallery-item:hover .ref-gallery-img {
+  transform: scale(1.04);
+}
+
+.gallery-hover-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.3s ease;
-}
-
-.gallery-card:hover .gallery-overlay {
-  background: rgba(0, 0, 0, 0.52);
-}
-
-.gallery-overlay i {
-  color: #ffffff;
-  font-size: 2rem;
   opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  transform: scale(0.85);
+  transition: opacity 0.2s ease;
 }
 
-.gallery-card:hover .gallery-overlay i {
+.ref-gallery-item:hover .gallery-hover-overlay {
   opacity: 1;
-  transform: scale(1);
 }
 
-/* ── Quote caption on card (optional hover label) ─────────── */
-.gallery-caption {
+.gallery-expand-icon {
+  color: #fff;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+.gallery-caption-bar {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 12px 14px;
-  background: linear-gradient(transparent, rgba(0,0,0,0.75));
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   line-height: 1.4;
   opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
+  transition: opacity 0.2s ease;
 }
 
-.gallery-card:hover .gallery-caption {
+.ref-gallery-item:hover .gallery-caption-bar {
   opacity: 1;
-  transform: translateY(0);
 }
 
-/* ── Fullscreen Modal ────────────────────────────────────── */
+/* ── FULLSCREEN MODAL ────────────────────────────────────── */
 .fullscreen-modal {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.96);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 2000;
-  padding: 24px;
-  animation: fadeIn 0.25s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-.close-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #ffffff;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 20px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.25s ease;
-  z-index: 2001;
-  backdrop-filter: blur(8px);
+  padding: 1.5rem;
 }
 
-.close-btn:hover {
-  background: rgba(255, 255, 255, 0.18);
-  transform: rotate(90deg) scale(1.08);
-}
-
-.modal-content {
-  position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
+.close-modal-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  animation: zoomIn 0.25s ease;
-}
-
-@keyframes zoomIn {
-  from { transform: scale(0.88); opacity: 0; }
-  to   { transform: scale(1);    opacity: 1; }
-}
-
-.modal-content img {
-  max-width: 100%;
-  max-height: calc(90vh - 130px);
-  object-fit: contain;
-  border-radius: 10px;
-}
-
-.image-quote-overlay {
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 18px 28px;
-  border-radius: 14px;
-  margin-top: 18px;
-  max-width: 600px;
-  text-align: center;
-}
-
-.image-quote-overlay p {
-  margin: 0;
-  color: #f0f0f0;
-  font-size: 1rem;
-  line-height: 1.65;
-  font-style: italic;
-}
-
-/* ── Responsive ──────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .archive {
-    padding: 40px 18px 120px;
-  }
-
-  .archive-header h2 {
-    font-size: 1.4rem;
-  }
-
-  .gallery-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 12px;
-  }
-
-  .gallery-card {
-    height: 200px;
-  }
-
-  .close-btn {
-    top: 12px;
-    right: 12px;
-    width: 38px;
-    height: 38px;
-    font-size: 18px;
-  }
-
-  .modal-content {
-    max-width: 95vw;
-    max-height: 95vh;
-  }
-
-  .modal-content img {
-    max-height: calc(90vh - 100px);
-  }
-
-  .image-quote-overlay {
-    padding: 14px 18px;
-    margin-top: 14px;
-  }
-
-  .image-quote-overlay p {
-    font-size: 0.88rem;
-  }
-}
-
-/* ── Small phones (≤ 480px) ─────────────────────────────── */
-@media (max-width: 480px) {
-  .archive {
-    padding: 32px 14px 120px;
-  }
-
-  .archive-header h2 {
-    font-size: 1.25rem;
-  }
-
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  .gallery-card {
-    height: 160px;
-  }
-
-  .fullscreen-modal {
-    padding: 12px;
-  }
-
-  .image-quote-overlay {
-    padding: 12px 14px;
-  }
-
-  .image-quote-overlay p {
-    font-size: 0.82rem;
-  }
-}
-
-/* ============================================================
-   ARCHIVE TITLE DOT  (Archives. / Gallery. / Music.)
-   ============================================================ */
-.archive-title-dot {
-  color: #7c3aed;
-  font-weight: 800;
-}
-
-/* ============================================================
-   FOLDER PICKER  (/archive index page)
-   ============================================================ */
-.folder-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-}
-
-.folder-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  background: transparent;
-  border: none;
+  justify-content: center;
   cursor: pointer;
-  padding: 12px;
-  border-radius: 12px;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.15s ease;
 }
 
-.folder-item:hover {
-  background: var(--bg-card-hover);
-  transform: translateY(-3px);
+.close-modal-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
-.folder-icon {
-  font-size: 4.5rem;
-  color: #7b8a9a;
-  transition: color 0.2s ease;
-  display: block;
+.modal-inner {
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.folder-item:hover .folder-icon {
-  color: #9baab8;
+.modal-image {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
-.folder-label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  font-family: "Courier New", monospace;
-  letter-spacing: 0.03em;
-  user-select: none;
+.modal-caption-wrap {
+  margin-top: 1rem;
+  color: #ededed;
+  font-size: 0.875rem;
+  text-align: center;
+  max-width: 32rem;
 }
 
-/* ============================================================
-   MUSIC EMBED  (/archive/music)
-   ============================================================ */
-.music-embed-wrap {
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-/* Responsive folder grid */
-@media (max-width: 480px) {
-  .folder-grid {
-    gap: 24px;
-  }
-
-  .folder-icon {
-    font-size: 3.6rem;
-  }
+/* ── MUSIC ───────────────────────────────────────────────── */
+.music-player-wrap {
+  margin-top: 1.5rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
 }

@@ -3,23 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { usePageTitle } from "../../hooks/usePageTitle";
 import "./Archive.css";
 
-// ─── ARCHIVE IMAGE DATA ──────────────────────────────────────────────────────
-//
-//  HOW TO ADD A NEW PHOTO:
-//  1. Drop your image into  src/assets/images/
-//  2. Add an import at the top of this block:
-//       import archive_6 from "..//../assets/images/archive_6.jpg";
-//  3. Add a new entry to the `archiveImages` array below.
-//     Required fields: id, image, imageQuote
-//     Optional: date (shown in modal)
-//
-// ────────────────────────────────────────────────────────────────────────────
-
-import archive_1 from "..//../assets/images/archive_1.jpg";
-import archive_2 from "..//../assets/images/archive_2.jpg";
-import archive_3 from "..//../assets/images/archive_3.jpg";
-import archive_4 from "..//../assets/images/archive_4.jpg";
-import archive_5 from "..//../assets/images/archive_5.jpg";
+import archive_1 from "../../assets/images/archive_1.jpg";
+import archive_2 from "../../assets/images/archive_2.jpg";
+import archive_3 from "../../assets/images/archive_3.jpg";
+import archive_4 from "../../assets/images/archive_4.jpg";
+import archive_5 from "../../assets/images/archive_5.jpg";
 
 const archiveImages = [
   {
@@ -54,10 +42,7 @@ const archiveImages = [
       "First company meetup — great vibes, great people, unforgettable moments! 🤓",
     date: "2026",
   },
-  // ← Add new entries here
 ];
-
-// ─── COMPONENT ───────────────────────────────────────────────────────────────
 
 export default function ArchiveGallery() {
   const navigate = useNavigate();
@@ -68,42 +53,75 @@ export default function ArchiveGallery() {
   const closeImage = () => setSelectedImage(null);
 
   return (
-    <div className="archive">
-      <section id="archive-gallery" className="archive-section">
-        {/* Header */}
-        <div className="archive-header">
-          <button
-            className="back-btn"
-            onClick={() => navigate("/archive")}
-            aria-label="Go back to archive"
+    <div className="archive-page-container">
+      {/* Top Header with Back Button */}
+      <div className="page-header-row">
+        <button
+          type="button"
+          className="back-icon-btn"
+          onClick={() => navigate("/archive")}
+          aria-label="Go back to archive"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <i className="fa-solid fa-arrow-left"></i>
-          </button>
-          <h2>Gallery<span className="archive-title-dot">.</span></h2>
-        </div>
+            <path d="m12 19-7-7 7-7"></path>
+            <path d="M19 12H5"></path>
+          </svg>
+        </button>
+        <h1 className="section-heading !mb-0">Gallery</h1>
+      </div>
 
-        {/* Gallery Grid */}
-        <div className="gallery-grid">
-          {archiveImages.map((item) => (
-            <div
-              key={item.id}
-              className="gallery-card"
-              onClick={() => openImage(item)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === "Enter" && openImage(item)}
-              aria-label={`View photo: ${item.imageQuote}`}
-            >
-              <img src={item.image} alt={`Archive ${item.id}`} loading="lazy" />
-              <div className="gallery-overlay">
-                <i className="fa-solid fa-expand"></i>
-              </div>
-              {/* Hover caption */}
-              <div className="gallery-caption">{item.imageQuote}</div>
+      {/* Gallery Grid */}
+      <div className="gallery-masonry-grid">
+        {archiveImages.map((item) => (
+          <div
+            key={item.id}
+            className="ref-gallery-item card-hover"
+            onClick={() => openImage(item)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && openImage(item)}
+            aria-label={`View photo: ${item.imageQuote}`}
+          >
+            <img
+              src={item.image}
+              alt={`Archive ${item.id}`}
+              className="ref-gallery-img"
+              loading="lazy"
+              decoding="async"
+            />
+            <div className="gallery-hover-overlay">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="gallery-expand-icon"
+              >
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <polyline points="9 21 3 21 3 15"></polyline>
+                <line x1="21" y1="3" x2="14" y2="10"></line>
+                <line x1="3" y1="21" x2="10" y2="14"></line>
+              </svg>
             </div>
-          ))}
-        </div>
-      </section>
+            <div className="gallery-caption-bar">{item.imageQuote}</div>
+          </div>
+        ))}
+      </div>
 
       {/* Fullscreen Modal */}
       {selectedImage && (
@@ -115,16 +133,34 @@ export default function ArchiveGallery() {
           aria-label="Full size photo view"
         >
           <button
-            className="close-btn"
+            type="button"
+            className="close-modal-btn"
             onClick={closeImage}
             aria-label="Close photo view"
           >
-            <i className="fa-solid fa-xmark"></i>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
           </button>
 
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <img src={selectedImage.image} alt="Fullscreen view" />
-            <div className="image-quote-overlay">
+          <div className="modal-inner" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={selectedImage.image}
+              alt="Fullscreen view"
+              className="modal-image"
+            />
+            <div className="modal-caption-wrap">
               <p>{selectedImage.imageQuote}</p>
             </div>
           </div>

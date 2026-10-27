@@ -1,110 +1,126 @@
 /* ============================================================
-   GOOGLE FONTS — Inter (modern, readable)
+   GOOGLE FONTS — Inter, Playfair Display & JetBrains Mono
    ============================================================ */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=JetBrains+Mono:wght@400;500;600&display=swap");
 
 /* ============================================================
-   CSS CUSTOM PROPERTIES — AMOLED Dark & White Themes
+   CSS CUSTOM PROPERTIES — aksn.fun exact color system & typography
    ============================================================ */
 :root,
 [data-theme="dark"] {
-  /* AMOLED true black */
-  --bg-primary:    #000000;
-  --bg-secondary:  #0d0d0d;
-  --bg-card:       #111111;
-  --bg-card-hover: #161616;
-  --border:        #1e1e1e;
-  --border-hover:  #2e2e2e;
+  --font-heading: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Courier New", Courier, monospace;
 
-  /* Text */
-  --text-primary:  #f5f5f5;
-  --text-secondary:#a0a0a0;
-  --text-muted:    #555555;
+  color-scheme: dark;
+  --background: #0d0d0d;
+  --foreground: #ededed;
+  --bg-primary: #0d0d0d;
+  --bg-secondary: #141414;
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --bg-card-hover: rgba(255, 255, 255, 0.10);
+  --border: rgba(255, 255, 255, 0.10);
+  --border-color: rgba(255, 255, 255, 0.10);
+  --border-hover: rgba(255, 255, 255, 0.20);
 
-  /* Accent */
-  --accent:        #ffffff;
-  --accent-soft:   rgba(255,255,255,0.06);
-  --accent-glow:   rgba(255,255,255,0.08);
+  /* Text colors */
+  --text-primary: #ededed;
+  --text-secondary: #9ca3af;
+  --text-muted: #868e9c;
 
-  /* Status indicator */
-  --status-bg:     #000000;
+  /* Accent & Highlights */
+  --accent: #a855f7;
+  --accent-hover: #c084fc;
+  --tag-bg: rgba(168, 85, 247, 0.15);
+  --tag-border: rgba(168, 85, 247, 0.30);
+  --tag-text: #c084fc;
+  --link-highlight: #facc15;
+  --marker: rgba(250, 204, 21, 0.28);
 
-  /* Nav */
-  --nav-bg:        rgba(10,10,10,0.82);
-  --nav-border:    rgba(255,255,255,0.08);
-  --nav-item-active: #1a1a1a;
-  --nav-icon:      #666;
-  --nav-icon-active:#fff;
-  --tooltip-bg:    #f0f0f0;
-  --tooltip-text:  #111;
+  /* Navigation & Floating Dock */
+  --bg-nav: rgba(0, 0, 0, 0.60);
+  --nav-bg: rgba(0, 0, 0, 0.60);
+  --nav-border: rgba(255, 255, 255, 0.10);
+  --nav-item-active: rgba(255, 255, 255, 0.12);
+  --nav-icon: #9ca3af;
+  --nav-icon-active: #ededed;
+  --tooltip-bg: #ededed;
+  --tooltip-text: #0d0d0d;
 
-  /* Form */
-  --input-bg:      #0d0d0d;
-  --input-border:  #2a2a2a;
-  --input-focus:   #444;
-  --placeholder:   #444;
+  /* Inputs & Forms */
+  --bg-input: rgba(255, 255, 255, 0.05);
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --input-border: rgba(255, 255, 255, 0.12);
+  --input-focus: #a855f7;
+  --placeholder: #6b7280;
 
-  /* Submit button */
-  --btn-bg:        #f0f0f0;
-  --btn-text:      #000;
-  --btn-hover:     #d0d0d0;
+  /* Buttons */
+  --btn-bg: #ededed;
+  --btn-text: #0d0d0d;
+  --btn-hover: #ffffff;
 
-  /* Mail box */
-  --mail-bg:       #000;
-  --mail-border:   #2a2a2a;
-
-  /* Resume btn */
-  --resume-bg:     #1a1a1a;
-  --resume-border: #3a3a3a;
-
-  /* Shadow */
-  --shadow-card:   0 4px 24px rgba(0,0,0,0.6);
-  --shadow-nav:    0 8px 40px rgba(0,0,0,0.8);
+  /* Shadows */
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-nav: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --bg-overlay: rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="light"] {
-  --bg-primary:    #ffffff;
-  --bg-secondary:  #f4f4f5;
-  --bg-card:       #fafafa;
-  --bg-card-hover: #f0f0f0;
-  --border:        #e4e4e7;
-  --border-hover:  #c4c4c7;
+  --font-heading: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Courier New", Courier, monospace;
 
-  --text-primary:  #09090b;
-  --text-secondary:#52525b;
-  --text-muted:    #a1a1aa;
+  color-scheme: light;
+  --background: #fafafa;
+  --foreground: #1a1a1a;
+  --bg-primary: #fafafa;
+  --bg-secondary: #f4f4f5;
+  --bg-card: rgba(0, 0, 0, 0.03);
+  --bg-card-hover: rgba(0, 0, 0, 0.06);
+  --border: rgba(0, 0, 0, 0.10);
+  --border-color: rgba(0, 0, 0, 0.10);
+  --border-hover: rgba(0, 0, 0, 0.18);
 
-  --accent:        #09090b;
-  --accent-soft:   rgba(0,0,0,0.04);
-  --accent-glow:   rgba(0,0,0,0.06);
+  /* Text colors */
+  --text-primary: #1a1a1a;
+  --text-secondary: #4b5563;
+  --text-muted: #636b78;
 
-  --status-bg:     #fff;
+  /* Accent & Highlights */
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --tag-bg: rgba(124, 58, 237, 0.08);
+  --tag-border: rgba(124, 58, 237, 0.20);
+  --tag-text: #7c3aed;
+  --link-highlight: #b45309;
+  --marker: rgba(250, 204, 21, 0.50);
 
-  --nav-bg:        rgba(255,255,255,0.88);
-  --nav-border:    rgba(0,0,0,0.10);
-  --nav-item-active:#f0f0f0;
-  --nav-icon:      #888;
-  --nav-icon-active:#09090b;
-  --tooltip-bg:    #09090b;
-  --tooltip-text:  #f5f5f5;
+  /* Navigation & Floating Dock */
+  --bg-nav: rgba(255, 255, 255, 0.80);
+  --nav-bg: rgba(255, 255, 255, 0.80);
+  --nav-border: rgba(0, 0, 0, 0.10);
+  --nav-item-active: rgba(0, 0, 0, 0.08);
+  --nav-icon: #4b5563;
+  --nav-icon-active: #1a1a1a;
+  --tooltip-bg: #1a1a1a;
+  --tooltip-text: #fafafa;
 
-  --input-bg:      #f4f4f5;
-  --input-border:  #d4d4d8;
-  --input-focus:   #a1a1aa;
-  --placeholder:   #a1a1aa;
+  /* Inputs & Forms */
+  --bg-input: rgba(0, 0, 0, 0.03);
+  --input-bg: rgba(0, 0, 0, 0.03);
+  --input-border: rgba(0, 0, 0, 0.12);
+  --input-focus: #7c3aed;
+  --placeholder: #9ca3af;
 
-  --btn-bg:        #09090b;
-  --btn-text:      #fff;
-  --btn-hover:     #27272a;
+  /* Buttons */
+  --btn-bg: #1a1a1a;
+  --btn-text: #fafafa;
+  --btn-hover: #000000;
 
-  --mail-bg:       #f4f4f5;
-  --mail-border:   #d4d4d8;
-
-  --resume-bg:     #e4e4e7;
-  --resume-border: #c4c4c7;
-
-  --shadow-card:   0 4px 24px rgba(0,0,0,0.08);
-  --shadow-nav:    0 8px 40px rgba(0,0,0,0.12);
+  /* Shadows */
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-nav: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --bg-overlay: rgba(0, 0, 0, 0.02);
 }
 
 /* ============================================================
@@ -124,12 +140,12 @@ html {
 }
 
 body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.6;
-  background-color: var(--bg-primary);
+  background-color: var(--background);
   color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -137,7 +153,6 @@ body {
   min-width: 320px;
 }
 
-/* Wilcard font reset — removed; per-component fonts used */
 a {
   text-decoration: none;
   color: inherit;
@@ -153,35 +168,117 @@ img {
 }
 
 /* ============================================================
-   SCROLLBAR STYLING (dark)
+   GLOBAL REUSABLE TYPOGRAPHY & UTILITIES (Reference Style)
    ============================================================ */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); }
-::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #444; }
+.font-serif {
+  font-family: var(--font-heading);
+}
+
+.section-heading {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.section-heading::after {
+  content: ".";
+  color: var(--accent);
+}
+
+.section-heading.no-dot::after {
+  content: none !important;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.card-hover {
+  transition: background-color 0.2s ease-out, transform 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  background-color: var(--bg-card-hover) !important;
+}
+
+/* Pill tags */
+.tag-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: var(--tag-bg);
+  color: var(--tag-text);
+  border: 1px solid var(--tag-border);
+}
+
+/* Links with accent underline */
+.link-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  color: var(--text-primary);
+  transition: color 0.15s ease;
+}
+
+.link-accent:hover {
+  color: var(--accent);
+}
 
 /* ============================================================
-   THEME TOGGLE BUTTON (shared)
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+
+/* ============================================================
+   THEME TOGGLE BUTTON (top-right fixed)
    ============================================================ */
 .theme-toggle {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1100;
-  width: 44px;
-  height: 44px;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   background: var(--bg-card);
   color: var(--text-primary);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  transition: all 0.25s ease;
-  box-shadow: var(--shadow-card);
+  font-size: 16px;
+  transition: all 0.2s ease;
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .theme-toggle:hover {
